@@ -28,13 +28,15 @@ CREATE TABLE IF NOT EXISTS admins (
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE IF NOT EXISTS sessions (
  id TEXT PRIMARY KEY,
  admin_id INTEGER NOT NULL REFERENCES admins(id) ON DELETE CASCADE,
  expires_at INTEGER NOT NULL,
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE IF NOT EXISTS products (
+
+CREATE TABLE IF NOT EXISTS products(
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  name TEXT NOT NULL,
  description TEXT NOT NULL DEFAULT '',
@@ -44,6 +46,7 @@ CREATE TABLE IF NOT EXISTS products (
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE IF NOT EXISTS services (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  name TEXT NOT NULL,
@@ -52,6 +55,7 @@ CREATE TABLE IF NOT EXISTS services (
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE IF NOT EXISTS advertisements (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  title TEXT NOT NULL,
@@ -61,6 +65,7 @@ CREATE TABLE IF NOT EXISTS advertisements (
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE IF NOT EXISTS messages (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  customer_name TEXT NOT NULL,
@@ -70,7 +75,16 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 `);
 
-function ensureAdmin() {
+const productColumns = db.prepare(`PRAGMA table_info(products)`).all();
+const productColumnNames = new Set(productColumns.map(c => c.name));
+
+if (!productColumnNames.has('category')) {
+  db.exec(`ALTER TABLE products ADD COLUMN category TEXT NOT NULL DEFAULT 'General'`);
+}
+
+if (!productColumnNames.has('stock')) {
+  db.exec(`ALTER TABLE products ADD COLUMN stock INTEGER NOT NULL DEFAULT 0`);
+}function ensureAdmin() {
  const email = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
  const password = process.env.ADMIN_PASSWORD || '';
  if (!email || !password || password === 'CHANGE_THIS_BEFORE_FIRST_RUN') return;
