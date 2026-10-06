@@ -1,0 +1,157 @@
+﻿<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SCBS | Sergio Chabu Business System</title><style>body{font-family:system-ui;margin:0;background:#f5f7fb;color:#172033}header{background:#101828;color:white;padding:22px}nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}button{padding:10px 14px;border:0;border-radius:9px;cursor:pointer}main{max-width:1000px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.card{background:white;padding:18px;border-radius:14px;box-shadow:0 2px 12px #00000012}input,textarea{width:100%;padding:10px;margin:6px 0 12px;box-sizing:border-box}.hidden{display:none}.danger{background:#fee2e2}.primary{background:#2563eb;color:white}.muted{color:#667085}</style></head><body><header><h1>SCBS</h1><div>Sergio Chabu Business System</div><nav><button onclick="show('home')">Home</button><button onclick="show('products')">What's Available</button><button onclick="show('services')">Multi-Tech Services</button><button onclick="show('ads')">Advertisements</button><button onclick="show('contact')">Talk to Us</button><button onclick="show('admin')">Admin</button></nav></header><main>
+<section id="home">
+  <div class="hero">
+    <p class="hero-label">SERGIO CHABU BUSINESS SYSTEM</p>
+    <h2>Welcome to SCBS</h2>
+    <p class="hero-title">Technology • Products • Services • Business Solutions</p>
+    <p class="muted">
+      SCBS brings products, technology services, customer support and business solutions
+      together in one growing platform.
+    </p>
+
+    <div class="hero-actions">
+      <button class="primary" onclick="show('products')">Explore Products</button>
+      <button onclick="show('services')">View Services</button>
+      <button onclick="show('contact')">Talk to SCBS</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🛒 Products & Accessories</h3>
+      <p>Explore products and accessories available through SCBS.</p>
+      <button onclick="show('products')">What's Available</button>
+    </div>
+
+    <div class="card">
+      <h3>💻 Technology Services</h3>
+      <p>Explore computer, software and authorized technology services.</p>
+      <button onclick="show('services')">View Services</button>
+    </div>
+
+    <div class="card">
+      <h3>🔧 Repair Services</h3>
+      <p>Technology repair and system support for customers.</p>
+      <button onclick="show('services')">Explore Services</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📢 Latest SCBS Advertisements</h3>
+    <div id="homeAds" class="grid"></div>
+  </div>
+
+  <div class="card">
+    <h3>🌍 Growing Beyond Zambia</h3>
+    <p>
+      SCBS is being developed as a long-term multi-service business platform,
+      with future plans for wider product sourcing, online services and physical SCBS shops.
+    </p>
+  </div>
+</section>
+<section id="products" class="hidden"><h2>What's Available</h2><div id="productsList" class="grid"></div></section>
+<section id="services" class="hidden"><h2>Multi-Tech Services</h2><div id="servicesList" class="grid"></div></section>
+<section id="ads" class="hidden"><h2>Advertisements</h2><div id="adsList" class="grid"></div></section>
+<section id="contact" class="hidden"><h2>Talk to SCBS</h2><form id="msg"><input name="customer_name" placeholder="Your name" required><input name="customer_contact" placeholder="Phone or email" required><textarea name="message" placeholder="How can we help?" required></textarea><button class="primary">Send Message</button></form><p id="msgStatus"></p></section>
+<section id="admin" class="hidden">
+  <h2>SCBS Owner Dashboard</h2>
+
+  <div id="login">
+    <form id="loginForm">
+      <input name="email" type="email" placeholder="Admin email" required>
+      <input name="password" type="password" placeholder="Password" required>
+      <button class="primary">Login</button>
+    </form>
+    <p id="loginStatus"></p>
+  </div>
+
+  <div id="dash" class="hidden">
+
+    <div class="admin-header">
+      <div>
+        <h2>Welcome to SCBS Owner Dashboard</h2>
+        <p>Signed in as <b id="adminEmail"></b></p>
+      </div>
+      <button onclick="logout()">Log out</button>
+    </div>
+
+    <div class="dashboard-grid">
+
+      <div class="dashboard-card">
+        <h3>🛒 Products</h3>
+        <p>Manage groceries and other products.</p>
+        <button onclick="document.getElementById('productForm').scrollIntoView()">Manage Products</button>
+      </div>
+
+      <div class="dashboard-card">
+        <h3>🛠️ Services</h3>
+        <p>Manage SCBS technology and business services.</p>
+        <button onclick="document.getElementById('serviceForm').scrollIntoView()">Manage Services</button>
+      </div>
+
+      <div class="dashboard-card">
+        <h3>📢 Advertisements</h3>
+        <p>Create promotions and announcements.</p>
+        <button onclick="document.getElementById('adForm').scrollIntoView()">Manage Ads</button>
+      </div>
+
+      <div class="dashboard-card">
+        <h3>💬 Customer Messages</h3>
+        <p>View customer requests and messages.</p>
+        <button onclick="document.getElementById('messages').scrollIntoView()">View Messages</button>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <h3>➕ Add Product</h3>
+    <form id="productForm">
+      <input name="name" placeholder="Product name" required>
+<input name="category" placeholder="Category" required>
+<input name="price" type="number" step="0.01" placeholder="Price" required>
+<input name="stock" type="number" min="0" placeholder="Stock quantity" required>
+<input name="image_url" placeholder="Image URL">
+<textarea name="description" placeholder="Description"></textarea>
+<button class="primary">Add Product</button>
+      <button class="primary">Add Product</button>
+    </form>
+
+    <h3>🛠️ Add Service</h3>
+    <form id="serviceForm">
+      <input name="name" placeholder="Service name" required>
+      <textarea name="description" placeholder="Description"></textarea>
+      <button class="primary">Add Service</button>
+    </form>
+
+    <h3>📢 Add Advertisement</h3>
+    <form id="adForm">
+      <input name="title" placeholder="Title" required>
+      <input name="image_url" placeholder="Image URL">
+      <textarea name="body" placeholder="Advertisement text"></textarea>
+      <button class="primary">Post Advertisement</button>
+    </form>
+
+    <h3>💬 Customer Messages</h3>
+    <div id="messages"></div>
+
+    <h3>📋 Current SCBS Content</h3>
+    <div id="adminContent"></div>
+
+  </div>
+</section>
+</main><script>
+const sections=['home','products','services','ads','contact','admin'];function show(id){sections.forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));if(id==='admin')checkAuth()}
+async function api(url,opt={}){const r=await fetch(url,{headers:{'Content-Type':'application/json',...(opt.headers||{})},...opt});let d=null;try{d=await r.json()}catch{}if(!r.ok)throw new Error(d?.error||'Request failed');return d}
+function card(title,body,extra=''){return `<div class="card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body||'')}</p>${extra}</div>`}function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function load(){const d=await api('/api/public/data');document.getElementById('productsList').innerHTML=d.products.map(x=>card(x.name,`${x.category?`<b>Category:</b> ${escapeHtml(x.category)}<br>`:''}${x.description?`${escapeHtml(x.description)}<br>`:''}${x.price?`<b>Price:</b> ${escapeHtml(x.price)}<br>`:''}<b>Stock:</b> ${x.stock}`,x.image_url?`<img src="${escapeHtml(x.image_url)}" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:10px">`:'' )).join('')||'<p>No products posted yet.</p>';document.getElementById('servicesList').innerHTML=d.services.map(x=>card(x.name,x.description)).join('')||'<p>No services posted yet.</p>';document.getElementById('adsList').innerHTML=d.advertisements.map(x=>card(x.title,x.body)).join('')||'<p>No advertisements posted yet.</p>';document.getElementById('homeAds').innerHTML=d.advertisements.slice(0,3).map(x=>card(x.title,x.body)).join('')}
+msg.onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);try{await api('/api/public/messages',{method:'POST',body:JSON.stringify(Object.fromEntries(f))});msgStatus.textContent='Message sent successfully.';e.target.reset()}catch(err){msgStatus.textContent=err.message}}
+loginForm.onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);try{await api('/api/auth/login',{method:'POST',body:JSON.stringify(Object.fromEntries(f))});e.target.reset();await checkAuth()}catch(err){loginStatus.textContent=err.message}}
+async function checkAuth(){try{const d=await api('/api/auth/me');login.classList.toggle('hidden',d.authenticated);dash.classList.toggle('hidden',!d.authenticated);if(d.authenticated){adminEmail.textContent=d.email;await dashboard()}}catch{login.classList.remove('hidden');dash.classList.add('hidden')}}
+async function dashboard(){const d=await api('/api/admin/dashboard');messages.innerHTML=d.messages.map(x=>card(x.customer_name,`${x.customer_contact}: ${x.message}`)).join('')||'<p>No messages.</p>';adminContent.innerHTML='<b>Products</b><br>'+d.products.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('products',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Services</b><br>'+d.services.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('services',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Advertisements</b><br>'+d.advertisements.map(x=>`${escapeHtml(x.title)} <button class="danger" onclick="del('advertisements',${x.id})">Delete</button>`).join('<br>')}
+async function del(type,id){if(!confirm('Delete this item?'))return;await api(`/api/admin/${type}/${id}`,{method:'DELETE'});await dashboard();await load()}
+productForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/products',e.target)};serviceForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/services',e.target)};adForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/advertisements',e.target)};async function create(url,form){const o=Object.fromEntries(new FormData(form));try{await api(url,{method:'POST',body:JSON.stringify(o)});form.reset();await dashboard();await load()}catch(e){alert(e.message)}}async function logout(){await api('/api/auth/logout',{method:'POST'});checkAuth()}
+load();show('home');
+</script></body></html>
+
+
