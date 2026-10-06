@@ -13,8 +13,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const SESSION_SECRET = process.env.SESSION_SECRET || 'dev-only-change-this-secret-please-32chars';
-const db = new Database(path.join(__dirname, 'scbs.db'));
-db.pragma('journal_mode = WAL');
+const dbPath = process.env.NODE_ENV === 'production'
+  ? '/data/scbs.db'
+  : path.join(__dirname, 'scbs.db');
+
+const db = new Database(dbPath);db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 db.exec(`
 CREATE TABLE IF NOT EXISTS admins (
