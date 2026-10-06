@@ -108,6 +108,11 @@ const publicLimiter = rateLimit({ windowMs: 60*1000, limit: 120, standardHeaders
 const loginSchema = z.object({ email:z.string().email().max(254), password:z.string().min(1).max(200) });
 const messageSchema = z.object({ customer_name:z.string().trim().min(1).max(100), customer_contact:z.string().trim().min(3).max(100), message:z.string().trim().min(1).max(2000) });
 const productSchema = z.object({ name:z.string().trim().min(1).max(120), category:z.string().trim().min(1).max(100), description:z.string().trim().max(1000).default(''), price:z.string().trim().max(100).default(''), stock:z.coerce.number().int().min(0).default(0), image_url:z.string().trim().max(1000).default(''), available:z.boolean().default(true) });
+const serviceSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  description: z.string().trim().max(1000).default(''),
+  active: z.boolean().default(true)
+});
 const adSchema = z.object({ title:z.string().trim().min(1).max(160), body:z.string().trim().max(2000).default(''), image_url:z.string().trim().max(1000).default(''), active:z.boolean().default(true) });
 
 function sign(value) { return crypto.createHmac('sha256', SESSION_SECRET).update(value).digest('hex'); }
