@@ -123,7 +123,35 @@
       <textarea name="description" placeholder="Description"></textarea>
       <button class="primary">Add Service</button>
     </form>
+<h3>🔧 Add Tool Rental</h3>
+<form id="toolRentalForm">
+  <input name="name" placeholder="Tool name" required>
 
+  <input
+    name="category"
+    placeholder="Category"
+    value="Authorized Service Tool"
+    required
+  >
+
+  <input
+    name="hourly_rate"
+    type="number"
+    step="0.01"
+    min="0"
+    placeholder="Hourly rental price"
+    required
+  >
+
+  <input name="image_url" placeholder="Image URL">
+
+  <textarea
+    name="description"
+    placeholder="Tool description"
+  ></textarea>
+
+  <button class="primary">Add Tool Rental</button>
+</form>
     <h3>📢 Add Advertisement</h3>
     <form id="adForm">
       <input name="title" placeholder="Title" required>
@@ -148,10 +176,8 @@ async function load(){const d=await api('/api/public/data');document.getElementB
 msg.onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);try{await api('/api/public/messages',{method:'POST',body:JSON.stringify(Object.fromEntries(f))});msgStatus.textContent='Message sent successfully.';e.target.reset()}catch(err){msgStatus.textContent=err.message}}
 loginForm.onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);try{await api('/api/auth/login',{method:'POST',body:JSON.stringify(Object.fromEntries(f))});e.target.reset();await checkAuth()}catch(err){loginStatus.textContent=err.message}}
 async function checkAuth(){try{const d=await api('/api/auth/me');login.classList.toggle('hidden',d.authenticated);dash.classList.toggle('hidden',!d.authenticated);if(d.authenticated){adminEmail.textContent=d.email;await dashboard()}}catch{login.classList.remove('hidden');dash.classList.add('hidden')}}
-async function dashboard(){const d=await api('/api/admin/dashboard');messages.innerHTML=d.messages.map(x=>card(x.customer_name,`${x.customer_contact}: ${x.message}`)).join('')||'<p>No messages.</p>';adminContent.innerHTML='<b>Products</b><br>'+d.products.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('products',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Services</b><br>'+d.services.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('services',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Advertisements</b><br>'+d.advertisements.map(x=>`${escapeHtml(x.title)} <button class="danger" onclick="del('advertisements',${x.id})">Delete</button>`).join('<br>')}
-async function del(type,id){if(!confirm('Delete this item?'))return;await api(`/api/admin/${type}/${id}`,{method:'DELETE'});await dashboard();await load()}
-productForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/products',e.target)};serviceForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/services',e.target)};adForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/advertisements',e.target)};async function create(url,form){const o=Object.fromEntries(new FormData(form));try{await api(url,{method:'POST',body:JSON.stringify(o)});form.reset();await dashboard();await load()}catch(e){alert(e.message)}}async function logout(){await api('/api/auth/logout',{method:'POST'});checkAuth()}
-load();show('home');
+async function dashboard(){const d=await api('/api/admin/dashboard');messages.innerHTML=d.messages.map(x=>card(x.customer_name,`${x.customer_contact}: ${x.message}`)).join('')||'<p>No messages.</p>';adminContent.innerHTML='<b>Products</b><br>'+d.products.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('products',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Services</b><br>'+d.services.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('services',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Tool Rentals</b><br>'+d.toolRentals.map(x=>`${escapeHtml(x.name)} — ${escapeHtml(x.hourly_rate)} / hour <button class="danger" onclick="del('tool-rentals',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Advertisements</b><br>'+d.advertisements.map(x=>`${escapeHtml(x.title)} <button class="danger" onclick="del('advertisements',${x.id})">Delete</button>`).join('<br>')}async function del(type,id){if(!confirm('Delete this item?'))return;await api(`/api/admin/${type}/${id}`,{method:'DELETE'});await dashboard();await load()}
+productForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/products',e.target)};serviceForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/services',e.target)};toolRentalForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/tool-rentals',e.target)};adForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/advertisements',e.target)};async function create(url,form){const o=Object.fromEntries(new FormData(form));try{await api(url,{method:'POST',body:JSON.stringify(o)});form.reset();await dashboard();await load()}catch(e){alert(e.message)}}async function logout(){await api('/api/auth/logout',{method:'POST'});checkAuth()}load();show('home');
 </script></body></html>
 
 

@@ -55,7 +55,18 @@ CREATE TABLE IF NOT EXISTS services (
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
+CREATE TABLE IF NOT EXISTS tool_rentals (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ name TEXT NOT NULL,
+ category TEXT NOT NULL DEFAULT 'Authorized Service Tool',
+ description TEXT NOT NULL DEFAULT '',
+ hourly_rate TEXT NOT NULL DEFAULT '',
+ image_url TEXT NOT NULL DEFAULT '',
+ available INTEGER NOT NULL DEFAULT 1,
+ active INTEGER NOT NULL DEFAULT 1,
+ created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 CREATE TABLE IF NOT EXISTS advertisements (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  title TEXT NOT NULL,
@@ -113,6 +124,15 @@ const serviceSchema = z.object({
   description: z.string().trim().max(1000).default(''),
   active: z.boolean().default(true)
 });
+const toolRentalSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  category: z.string().trim().min(1).max(100).default('Authorized Service Tool'),
+  description: z.string().trim().max(1000).default(''),
+  hourly_rate: z.string().trim().max(100).default(''),
+  image_url: z.string().trim().max(1000).default(''),
+  available: z.boolean().default(true),
+  active: z.boolean().default(true)
+});
 const adSchema = z.object({ title:z.string().trim().min(1).max(160), body:z.string().trim().max(2000).default(''), image_url:z.string().trim().max(1000).default(''), active:z.boolean().default(true) });
 
 function sign(value) { return crypto.createHmac('sha256', SESSION_SECRET).update(value).digest('hex'); }
@@ -150,6 +170,12 @@ app.get('/api/public/data',(req,res)=>{
  res.json({
  products:db.prepare('SELECT id,name,category,description,price,stock,image_url,available FROM products WHERE available=1 ORDER BY id DESC').all(),
   services:db.prepare('SELECT id,name,description FROM services WHERE active=1 ORDER BY id DESC').all(),
+toolRentals:db.prepare(`
+  SELECT id,name,category,description,hourly_rate,image_url
+  FROM tool_rentals
+  WHERE active=1 AND available=1
+  ORDER BY id DESC
+`).all(),
   advertisements:db.prepare('SELECT id,title,body,image_url FROM advertisements WHERE active=1 ORDER BY id DESC').all()
  });
 });
@@ -158,12 +184,44 @@ app.post('/api/public/messages',(req,res)=>{ const p=messageSchema.safeParse(req
 app.get('/api/admin/dashboard',requireAdmin,(req,res)=>res.json({
  products:db.prepare('SELECT * FROM products ORDER BY id DESC').all(),
  services:db.prepare('SELECT * FROM services ORDER BY id DESC').all(),
+ toolRentals:db.prepare('SELECT * FROM tool_rentals ORDER BY id DESC').all(),
  advertisements:db.prepare('SELECT * FROM advertisements ORDER BY id DESC').all(),
  messages:db.prepare('SELECT * FROM messages ORDER BY id DESC LIMIT 100').all()
-}));
-app.post('/api/admin/products',requireAdmin,(req,res)=>{const p=productSchema.safeParse(req.body);if(!p.success)return res.status(400).json({error:'Invalid product'});const x=p.data;const r=db.prepare('INSERT INTO products(name,category,description,price,stock,image_url,available) VALUES(?,?,?,?,?,?,?)').run(x.name,x.category,x.description,x.price,x.stock,x.image_url,x.available?1:0);res.status(201).json({id:r.lastInsertRowid});});app.delete('/api/admin/products/:id',requireAdmin,(req,res)=>{db.prepare('DELETE FROM products WHERE id=?').run(Number(req.params.id));res.status(204).end();});
+}));app.post('/api/admin/products',requireAdmin,(req,res)=>{const p=productSchema.safeParse(req.body);if(!p.success)return res.status(400).json({error:'Invalid product'});const x=p.data;const r=db.prepare('INSERT INTO products(name,category,description,price,stock,image_url,available) VALUES(?,?,?,?,?,?,?)').run(x.name,x.category,x.description,x.price,x.stock,x.image_url,x.available?1:0);res.status(201).json({id:r.lastInsertRowid});});app.delete('/api/admin/products/:id',requireAdmin,(req,res)=>{db.prepare('DELETE FROM products WHERE id=?').run(Number(req.params.id));res.status(204).end();});
 app.post('/api/admin/services',requireAdmin,(req,res)=>{const p=serviceSchema.safeParse(req.body);if(!p.success)return res.status(400).json({error:'Invalid service'});const x=p.data;const r=db.prepare('INSERT INTO services(name,description,active) VALUES(?,?,?)').run(x.name,x.description,x.active?1:0);res.status(201).json({id:r.lastInsertRowid});});
 app.delete('/api/admin/services/:id',requireAdmin,(req,res)=>{db.prepare('DELETE FROM services WHERE id=?').run(Number(req.params.id));res.status(204).end();});
+app.post('/api/admin/tool-rentals',requireAdmin,(req,res)=>{
+  const p = toolRentalSchema.safeParse(req.body);
+
+  if (!p.success) {
+    return res.status(400).json({error:'Invalid tool rental'});
+  }
+
+  const x = p.data;
+
+  const r = db.prepare(`
+    INSERT INTO tool_rentals
+    (name,category,description,hourly_rate,image_url,available,active)
+    VALUES (?,?,?,?,?,?,?)
+  `).run(
+    x.name,
+    x.category,
+    x.description,
+    x.hourly_rate,
+    x.image_url,
+    x.available ? 1 : 0,
+    x.active ? 1 : 0
+  );
+
+  res.status(201).json({id:r.lastInsertRowid});
+});
+
+app.delete('/api/admin/tool-rentals/:id',requireAdmin,(req,res)=>{
+  db.prepare('DELETE FROM tool_rentals WHERE id=?')
+    .run(Number(req.params.id));
+
+  res.status(204).end();
+});
 app.post('/api/admin/advertisements',requireAdmin,(req,res)=>{const p=adSchema.safeParse(req.body);if(!p.success)return res.status(400).json({error:'Invalid advertisement'});const x=p.data;const r=db.prepare('INSERT INTO advertisements(title,body,image_url,active) VALUES(?,?,?,?)').run(x.title,x.body,x.image_url,x.active?1:0);res.status(201).json({id:r.lastInsertRowid});});
 app.delete('/api/admin/advertisements/:id',requireAdmin,(req,res)=>{db.prepare('DELETE FROM advertisements WHERE id=?').run(Number(req.params.id));res.status(204).end();});
 app.get('/api/admin/messages',requireAdmin,(req,res)=>res.json(db.prepare('SELECT * FROM messages ORDER BY id DESC LIMIT 200').all()));
