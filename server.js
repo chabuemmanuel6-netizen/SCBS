@@ -56,7 +56,9 @@ CREATE TABLE IF NOT EXISTS products(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   description TEXT NOT NULL DEFAULT '',
+  category TEXT NOT NULL DEFAULT 'General',
   price TEXT NOT NULL DEFAULT '',
+  stock INTEGER NOT NULL DEFAULT 0,
   image_url TEXT NOT NULL DEFAULT '',
   available INTEGER NOT NULL DEFAULT 1,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -100,34 +102,27 @@ CREATE TABLE IF NOT EXISTS messages (
   customer_name TEXT NOT NULL,
   customer_contact TEXT NOT NULL,
   message TEXT NOT NULL,
-  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  status TEXT NOT NULL DEFAULT 'New',
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS orders (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   customer_id INTEGER NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
-  customer_name TEXT NOT NULL,
-  customer_contact TEXT NOT NULL,
-  items TEXT NOT NULL DEFAULT '[]',
-  total TEXT NOT NULL DEFAULT '0',
-  status TEXT NOT NULL DEFAULT 'pending',
+  order_number TEXT NOT NULL UNIQUE,
+  items_json TEXT NOT NULL DEFAULT '[]',
+  total_amount REAL NOT NULL DEFAULT 0,
+  status TEXT NOT NULL DEFAULT 'Pending',
+  customer_note TEXT NOT NULL DEFAULT '',
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX IF NOT EXISTS idx_orders_customer_id ON orders(customer_id);
 `;
 
 db.exec(schemaSql);
-
-const productColumns = db.prepare(`PRAGMA table_info(products)`).all();
-const productColumnNames = new Set(productColumns.map(c => c.name));
-
-if (!productColumnNames.has('category')) {
-  db.exec(`ALTER TABLE products ADD COLUMN category TEXT NOT NULL DEFAULT 'General'`);
-}
-
-if (!productColumnNames.has('stock')) {
-  db.exec(`ALTER TABLE products ADD COLUMN stock INTEGER NOT NULL DEFAULT 0`);
-}
 
 function ensureAdmin() {
   const email = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
@@ -172,13 +167,8 @@ const loginSchema = z.object({
 const customerRegisterSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(254),
-  phone: z.string().trim().min(5).max(80),
-  password: z.string().min(6).max(200),
-});
-
-const customerLoginSchema = z.object({
-  email: z.string().trim().email().max(254),
-  password: z.string().min(1).max(200),
+  phone: z.string().trim().max(80).optional().default(''),
+  password: z.string().min(10).max(200),
 });
 
 const messageSchema = z.object({
@@ -191,8 +181,8 @@ const productSchema = z.object({
   name: z.string().trim().min(1).max(120),
   category: z.string().trim().min(1).max(100),
   description: z.string().trim().max(1000).default(''),
-  price: z.string().trim().min(1).max(100),
-  stock: z.coerce.number().int().min(0).max(100000).default(0),
+  price: z.string().trim().max(100).default(''),
+  stock: z.coerce.number().int().min(0).default(0),
   image_url: z.string().trim().max(1000).default(''),
   available: z.boolean().default(true),
 });
@@ -233,7 +223,7 @@ function createSession(adminId) {
 
 function createCustomerSession(customerId) {
   const id = crypto.randomBytes(32).toString('hex');
-  const expires = Date.now() + 30 * 24 * 60 * 60 * 1000;
+  const expires = Date.now() + 8 * 60 * 60 * 1000;
   db.prepare('INSERT INTO customer_sessions(id,customer_id,expires_at) VALUES(?,?,?)').run(id, customerId, expires);
   return { id, expires };
 }
@@ -295,35 +285,6 @@ function cleanSessions() {
 
 setInterval(cleanSessions, 30 * 60 * 1000).unref();
 
-function parseMoney(value) {
-  const numeric = Number.parseFloat(String(value ?? '0').replace(/[^0-9.-]/g, ''));
-  return Number.isFinite(numeric) ? numeric : 0;
-}
-
-function normalizeOrderItems(rawItems, fallback = null) {
-  let items = Array.isArray(rawItems) ? rawItems : [];
-
-  if (!items.length && fallback) {
-    items = [fallback];
-  }
-
-  if (!items.length) return null;
-
-  return items.map((item) => {
-    const productId = Number(item.product_id ?? item.id ?? 0);
-    const quantity = Number(item.quantity ?? 1);
-    const unitPrice = String(item.price ?? item.unit_price ?? '0');
-    const name = String(item.name ?? item.product_name ?? 'Product').trim() || 'Product';
-
-    return {
-      product_id: Number.isFinite(productId) ? productId : 0,
-      name: name.slice(0, 200),
-      quantity: Number.isFinite(quantity) && quantity > 0 ? quantity : 1,
-      price: unitPrice.slice(0, 100),
-    };
-  });
-}
-
 app.use('/api/public', publicLimiter);
 
 app.post('/api/auth/login', authLimiter, (req, res) => {
@@ -364,7 +325,7 @@ app.get('/api/auth/me', (req, res) => {
 app.post('/api/customers/register', publicLimiter, (req, res) => {
   const parsed = customerRegisterSchema.safeParse(req.body);
   if (!parsed.success) {
-    return res.status(400).json({ error: 'Please provide a valid name, email, phone number and password.' });
+    return res.status(400).json({ error: 'Please provide a valid name, email, phone (optional) and password (10+ characters).' });
   }
 
   const data = parsed.data;
@@ -386,24 +347,23 @@ app.post('/api/customers/register', publicLimiter, (req, res) => {
   res.cookie('scbs_customer_session', `${session.id}.${sign(session.id)}`, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 30 * 24 * 60 * 60 * 1000,
+    sameSite: 'strict',
+    maxAge: 8 * 60 * 60 * 1000,
   });
 
   res.status(201).json({
     ok: true,
-    message: 'Account created successfully.',
     customer: { id: Number(result.lastInsertRowid), name: data.name.trim(), email },
   });
 });
 
 app.post('/api/customers/login', authLimiter, (req, res) => {
-  const parsed = customerLoginSchema.safeParse(req.body);
+  const parsed = loginSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ error: 'Invalid login details.' });
   }
 
-  const email = parsed.data.email.trim().toLowerCase();
+  const email = parsed.data.email.toLowerCase();
   const customer = db.prepare('SELECT * FROM customers WHERE email=?').get(email);
   if (!customer || !bcrypt.compareSync(parsed.data.password, customer.password_hash)) {
     return res.status(401).json({ error: 'Invalid email or password.' });
@@ -413,11 +373,11 @@ app.post('/api/customers/login', authLimiter, (req, res) => {
   res.cookie('scbs_customer_session', `${session.id}.${sign(session.id)}`, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 30 * 24 * 60 * 60 * 1000,
+    sameSite: 'strict',
+    maxAge: 8 * 60 * 60 * 1000,
   });
 
-  res.json({ ok: true, customer: { id: customer.id, name: customer.name, email: customer.email } });
+  res.json({ ok: true, customer: { id: customer.id, name: customer.name, email: customer.email, phone: customer.phone } });
 });
 
 app.post('/api/customers/logout', requireCustomer, (req, res) => {
@@ -439,7 +399,7 @@ app.get('/api/customers/me', (req, res) => {
       id: customer.id,
       name: customer.name,
       email: customer.email,
-      phone: customer.phone,
+      phone: customer.phone || '',
     },
   });
 });
@@ -458,66 +418,155 @@ app.get('/api/public/data', (req, res) => {
   });
 });
 
-app.post('/api/public/messages', (req, res) => {
+app.post('/api/public/messages', publicLimiter, (req, res) => {
   const parsed = messageSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ error: 'Please provide valid contact details and message' });
   }
 
-  db.prepare('INSERT INTO messages(customer_name,customer_contact,message) VALUES(?,?,?)').run(
+  db.prepare('INSERT INTO messages(customer_name,customer_contact,message,status) VALUES(?,?,?,?)').run(
     parsed.data.customer_name,
     parsed.data.customer_contact,
     parsed.data.message,
+    'New',
   );
 
   res.status(201).json({ ok: true, message: 'Message sent successfully.' });
 });
 
 app.post('/api/orders', requireCustomer, (req, res) => {
-  const items = normalizeOrderItems(req.body.items, req.body);
-  if (!items || !items.length) {
-    return res.status(400).json({ error: 'Please include at least one product in the order.' });
+  const schema = z.object({
+    items: z.array(
+      z.object({
+        productId: z.number().int().positive(),
+        quantity: z.number().int().min(1).max(100),
+      })
+    ).min(1).max(50),
+    customerNote: z.string().trim().max(500).optional().default(''),
+  });
+
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: 'Provide valid product IDs and quantities.' });
   }
 
-  const total = items.reduce((sum, item) => {
-    const unitPrice = parseMoney(item.price);
-    return sum + (unitPrice * item.quantity);
-  }, 0).toFixed(2);
+  const quantities = new Map();
+  for (const item of parsed.data.items) {
+    quantities.set(item.productId, (quantities.get(item.productId) || 0) + item.quantity);
+  }
 
-  const customer = req.customer;
-  const result = db.prepare(`
-    INSERT INTO orders(customer_id, customer_name, customer_contact, items, total, status)
-    VALUES(?,?,?,?,?,?)
-  `).run(
-    customer.id,
-    customer.name,
-    customer.phone,
-    JSON.stringify(items),
-    total,
-    'pending',
-  );
+  try {
+    const createOrder = db.transaction(() => {
+      const orderItems = [];
+      let totalAmount = 0;
 
-  res.status(201).json({
-    ok: true,
-    orderId: Number(result.lastInsertRowid),
-    status: 'pending',
-    total,
-  });
+      for (const [productId, quantity] of quantities) {
+        const product = db.prepare(`
+          SELECT id, name, price, available, stock
+          FROM products
+          WHERE id = ?
+        `).get(productId);
+
+        if (!product || product.available !== 1) {
+          throw new Error(`Product ${productId} is unavailable.`);
+        }
+
+        if (product.stock !== null && product.stock < quantity) {
+          throw new Error(`Insufficient stock for ${product.name}.`);
+        }
+
+        if (product.stock !== null) {
+          const stockUpdate = db.prepare(`
+            UPDATE products
+            SET stock = stock - ?
+            WHERE id = ?
+              AND available = 1
+              AND stock >= ?
+          `).run(quantity, productId, quantity);
+
+          if (stockUpdate.changes !== 1) {
+            throw new Error(`Insufficient stock for ${product.name}.`);
+          }
+        }
+
+        const priceText = String(product.price).trim();
+        if (!/^\d+(\.\d{1,2})?$/.test(priceText)) {
+          throw new Error(`Invalid price configured for ${product.name}.`);
+        }
+
+        const price = Number(priceText);
+        totalAmount += price * quantity;
+
+        orderItems.push({
+          productId: product.id,
+          name: product.name,
+          unitPrice: price,
+          quantity,
+        });
+      }
+
+      const orderNumber = 'SCBS-' + Date.now() + '-' + crypto.randomBytes(3).toString('hex').toUpperCase();
+
+      const result = db.prepare(`
+        INSERT INTO orders (customer_id, order_number, items_json, total_amount, status, customer_note)
+        VALUES (?, ?, ?, ?, 'Pending', ?)
+      `).run(
+        req.customer.id,
+        orderNumber,
+        JSON.stringify(orderItems),
+        Number(totalAmount.toFixed(2)),
+        parsed.data.customerNote
+      );
+
+      return {
+        id: Number(result.lastInsertRowid),
+        orderNumber,
+        items: orderItems,
+        totalAmount: Number(totalAmount.toFixed(2)),
+        status: 'Pending',
+      };
+    });
+
+    const order = createOrder();
+    return res.status(201).json({
+      ok: true,
+      message: 'Order submitted successfully.',
+      order,
+    });
+  } catch (error) {
+    if (error.message.startsWith('Product ') || error.message.startsWith('Insufficient stock') || error.message.startsWith('Invalid price')) {
+      return res.status(400).json({ error: error.message });
+    }
+    console.error('Order creation failed:', error.message);
+    return res.status(500).json({ error: 'Unable to create the order right now.' });
+  }
 });
 
 app.get('/api/orders', requireCustomer, (req, res) => {
-  const rows = db.prepare('SELECT * FROM orders WHERE customer_id=? ORDER BY id DESC').all(req.customer.id);
-  const orders = rows.map((row) => ({
-    ...row,
-    items: JSON.parse(row.items || '[]'),
-  }));
+  try {
+    const rows = db.prepare(`
+      SELECT id, customer_id, order_number, items_json, total_amount, status, customer_note, created_at, updated_at
+      FROM orders
+      WHERE customer_id = ?
+      ORDER BY id DESC
+    `).all(req.customer.id);
 
-  res.json({ orders });
-});
+    const orders = rows.map((row) => ({
+      id: row.id,
+      orderNumber: row.order_number,
+      items: JSON.parse(row.items_json || '[]'),
+      totalAmount: row.total_amount,
+      status: row.status,
+      customerNote: row.customer_note,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
 
-app.get('/api/customers/orders', requireCustomer, (req, res) => {
-  const rows = db.prepare('SELECT * FROM orders WHERE customer_id=? ORDER BY id DESC').all(req.customer.id);
-  res.json({ orders: rows.map((row) => ({ ...row, items: JSON.parse(row.items || '[]') })) });
+    res.json({ ok: true, orders });
+  } catch (error) {
+    console.error('Failed to retrieve customer orders:', error.message);
+    res.status(500).json({ error: 'Unable to retrieve orders right now.' });
+  }
 });
 
 app.get('/api/admin/dashboard', requireAdmin, (req, res) => {
@@ -528,6 +577,34 @@ app.get('/api/admin/dashboard', requireAdmin, (req, res) => {
     advertisements: db.prepare('SELECT * FROM advertisements ORDER BY id DESC').all(),
     messages: db.prepare('SELECT * FROM messages ORDER BY id DESC LIMIT 100').all(),
   });
+});
+
+app.get('/api/admin/orders', requireAdmin, (req, res) => {
+  try {
+    const rows = db.prepare(`
+      SELECT id, customer_id, order_number, items_json, total_amount, status, customer_note, created_at, updated_at
+      FROM orders
+      ORDER BY id DESC
+      LIMIT 200
+    `).all();
+
+    const orders = rows.map((row) => ({
+      id: row.id,
+      customerId: row.customer_id,
+      orderNumber: row.order_number,
+      items: JSON.parse(row.items_json || '[]'),
+      totalAmount: row.total_amount,
+      status: row.status,
+      customerNote: row.customer_note,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
+
+    res.json({ ok: true, orders });
+  } catch (error) {
+    console.error('Failed to retrieve admin orders:', error.message);
+    res.status(500).json({ error: 'Unable to retrieve orders right now.' });
+  }
 });
 
 app.post('/api/admin/products', requireAdmin, (req, res) => {
@@ -549,6 +626,42 @@ app.post('/api/admin/products', requireAdmin, (req, res) => {
   );
 
   res.status(201).json({ id: Number(result.lastInsertRowid) });
+});
+
+app.put('/api/admin/products/:id', requireAdmin, (req, res) => {
+  const id = Number(req.params.id);
+  const parsed = productSchema.safeParse(req.body);
+
+  if (!Number.isInteger(id) || !parsed.success) {
+    return res.status(400).json({ error: 'Invalid product update' });
+  }
+
+  const x = parsed.data;
+  const result = db.prepare(`
+    UPDATE products
+    SET name=?, category=?, description=?, price=?, stock=?, image_url=?, available=?, updated_at=CURRENT_TIMESTAMP
+    WHERE id=?
+  `).run(
+    x.name,
+    x.category,
+    x.description,
+    x.price,
+    x.stock,
+    x.image_url,
+    x.available ? 1 : 0,
+    id
+  );
+
+  if (result.changes === 0) {
+    return res.status(404).json({ error: 'Product not found' });
+  }
+
+  res.json({ ok: true });
+});
+
+app.delete('/api/admin/products/:id', requireAdmin, (req, res) => {
+  db.prepare('DELETE FROM products WHERE id=?').run(Number(req.params.id));
+  res.status(204).end();
 });
 
 app.post('/api/admin/services', requireAdmin, (req, res) => {
@@ -621,30 +734,43 @@ app.get('/api/admin/messages', requireAdmin, (req, res) => {
   res.json(db.prepare('SELECT * FROM messages ORDER BY id DESC LIMIT 200').all());
 });
 
-app.get('/api/admin/orders', requireAdmin, (req, res) => {
-  const rows = db.prepare(`
-    SELECT o.*, c.name AS customer_name, c.email AS customer_email, c.phone AS customer_phone
-    FROM orders o
-    JOIN customers c ON c.id = o.customer_id
-    ORDER BY o.id DESC
-  `).all();
+app.patch('/api/admin/messages/:id/status', requireAdmin, (req, res) => {
+  const id = Number(req.params.id);
+  const status = String(req.body?.status || '').trim();
+  const allowed = ['New', 'In Progress', 'Completed'];
 
-  res.json({ orders: rows.map((row) => ({ ...row, items: JSON.parse(row.items || '[]') })) });
+  if (!Number.isInteger(id) || !allowed.includes(status)) {
+    return res.status(400).json({ error: 'Invalid message status.' });
+  }
+
+  const result = db.prepare('UPDATE messages SET status=?, updated_at=CURRENT_TIMESTAMP WHERE id=?').run(status, id);
+  if (result.changes === 0) return res.status(404).json({ error: 'Message not found.' });
+
+  res.json({ ok: true, status });
+});
+
+app.delete('/api/admin/messages/:id', requireAdmin, (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Invalid message ID.' });
+
+  const result = db.prepare('DELETE FROM messages WHERE id=?').run(id);
+  if (result.changes === 0) return res.status(404).json({ error: 'Message not found.' });
+
+  res.status(204).end();
 });
 
 app.patch('/api/admin/orders/:id/status', requireAdmin, (req, res) => {
   const id = Number(req.params.id);
-  if (!Number.isInteger(id)) {
-    return res.status(400).json({ error: 'Invalid order id.' });
+  const status = String(req.body?.status || '').trim();
+  const allowed = ['Pending', 'Confirmed', 'Processing', 'Completed', 'Cancelled'];
+
+  if (!Number.isInteger(id) || !allowed.includes(status)) {
+    return res.status(400).json({ error: 'Invalid order status.' });
   }
 
-  const status = String(req.body.status || '').trim();
-  const allowed = ['pending', 'processing', 'completed', 'cancelled'];
-  if (!allowed.includes(status)) {
-    return res.status(400).json({ error: 'Invalid status value.' });
-  }
+  const result = db.prepare('UPDATE orders SET status=?, updated_at=CURRENT_TIMESTAMP WHERE id=?').run(status, id);
+  if (result.changes === 0) return res.status(404).json({ error: 'Order not found.' });
 
-  db.prepare('UPDATE orders SET status=?, updated_at=CURRENT_TIMESTAMP WHERE id=?').run(status, id);
   res.json({ ok: true, status });
 });
 
