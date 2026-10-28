@@ -54,3 +54,11 @@ Do not merge PR #1 until a migration implementation is tested against a copy of 
 ## Additional startup blocker found during code review
 
 The upgrade server previously created `messages_customer_date_idx` unconditionally after adding reply columns. The legacy production `messages` table has neither `customer_id` nor the new customer-linked message shape, so SQLite would reject the index creation and stop the application at startup. The review branch now creates that index only when both referenced columns exist (commit `587bc5110c0c7b1055f8fe6af53c51477c1169d4`). This prevents that specific startup crash; it does **not** make all new message routes compatible with the legacy schema. The migration and end-to-end checks below remain required.
+
+## Preflight safety test
+
+A synthetic legacy-database test is available at `tests/scbs-legacy-data-preflight.test.js`. It creates a temporary fixture, runs the diagnostic, and asserts the schema and row counts remain unchanged. From the project root, run:
+
+`node --test tests/scbs-legacy-data-preflight.test.js`
+
+This tests the diagnostic only; it is not a substitute for running it against a consistent staging copy of the real legacy database or for end-to-end application testing.
