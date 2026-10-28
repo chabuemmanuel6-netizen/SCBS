@@ -66,7 +66,12 @@ ensureColumn('services', 'image_url', 'TEXT');
     if (!existing.has('customer_last_seen_at')) {
       db.exec("ALTER TABLE messages ADD COLUMN customer_last_seen_at TEXT");
     }
-    db.exec("CREATE INDEX IF NOT EXISTS messages_customer_date_idx ON messages(customer_id, created_at DESC)");
+    // Legacy production messages do not have customer_id yet. Do not create
+    // this index until a separately tested migration has added that column.
+    // This keeps startup from failing before the migration can be validated.
+    if (existing.has('customer_id') && existing.has('created_at')) {
+      db.exec("CREATE INDEX IF NOT EXISTS messages_customer_date_idx ON messages(customer_id, created_at DESC)");
+    }
   }
 }
 
