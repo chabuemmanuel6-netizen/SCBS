@@ -1,186 +1,2610 @@
-﻿<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SCBS | Sergio Chabu Business System</title><style>body{font-family:system-ui;margin:0;background:#f5f7fb;color:#172033}header{background:#101828;color:white;padding:22px}nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}button{padding:10px 14px;border:0;border-radius:9px;cursor:pointer}main{max-width:1000px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.card{background:white;padding:18px;border-radius:14px;box-shadow:0 2px 12px #00000012}input,textarea{width:100%;padding:10px;margin:6px 0 12px;box-sizing:border-box}.hidden{display:none}.danger{background:#fee2e2}.primary{background:#2563eb;color:white}.muted{color:#667085}</style></head><body><header><h1>SCBS</h1><div>Sergio Chabu Business System</div><nav><button onclick="show('home')">Home</button><button onclick="show('products')">What's Available</button><button onclick="show('services')">Multi-Tech Services</button><button onclick="show('tool-rentals')">🔧 Tool Rentals</button><button onclick="show('ads')">Advertisements</button><button onclick="show('contact')">Talk to Us</button><button onclick="show('admin')">Admin</button></nav></header><main>
-<section id="home">
-  <div class="hero">
-    <p class="hero-label">SERGIO CHABU BUSINESS SYSTEM</p>
-    <h2>Welcome to SCBS</h2>
-    <p class="hero-title">Technology • Products • Services • Business Solutions</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="Sergio Chabu Business System - products, multi-tech services, rentals, books and business promotions.">
+    <title>SCBS | Sergio Chabu Business System</title>
+  <style>
+    :root{--bg:#071426;--panel:#102640;--panel2:#0c1e36;--line:#ffffff24;--text:#f5f8ff;--muted:#aebed3;--blue:#438ff5;--mint:#8ce6d0;--gold:#ffd27d}
+    *{box-sizing:border-box}
+    html{scroll-behavior:auto;scroll-padding-top:20px}
+    body{margin:0;background:radial-gradient(ellipse at 80% -10%,#183d68,transparent 42%),var(--bg);color:var(--text);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body.tabs-ready main>section{display:none}
+    body.tabs-ready main>section.active{display:block}
+    body.tabs-ready main>section.hero.active{display:grid}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .wrap{width:min(1180px,calc(100% - 34px));margin:auto}
+    header{padding:16px 0;display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;flex-shrink:0}
+    .logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#73b7ff,#2464d7);color:#071426;font-size:21px;font-weight:900;box-shadow:0 8px 25px #2464d744}
+    .brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em}
+    nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 100%;
+}
+
+nav {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: flex-end;
+gap: 8px;
+width: 100%;
+}
+
+nav a,
+nav button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+min-height: 40px;
+padding: 9px 12px;
+border: 1px solid #ffffff18;
+border-radius: 12px;
+background: #ffffff08;
+color: #dbe7f7;
+font-size: 12px;
+font-weight: 650;
+line-height: 1.4;
+text-align: center;
+white-space: normal;
+transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+nav a:hover,
+nav button:hover,
+nav a.active {
+border-color: #8ce6d088;
+background: #8ce6d01a;
+color: #ffffff;
+}
+
+nav button.primary {
+min-width: 44px;
+min-height: 44px;
+padding: 8px;
+border: 1px solid #8ce6d066;
+border-radius: 14px;
+background: #8ce6d018 !important;
+color: #8ce6d0 !important;
+font-size: 20px;
+}
+
+nav a:focus-visible,
+nav button:focus-visible {
+outline: 2px solid #8ce6d0;
+outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+nav {
+justify-content: flex-start;
+}
+}
+
+@media (max-width: 560px) {
+nav {
+gap: 6px;
+}
+
+nav a,
+nav button {
+padding: 8px 10px;
+font-size: 11px;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+nav a,
+nav button {
+transition: none;
+}
+}
+
+    nav a,nav button{font-size:12px;padding:8px 10px;border-radius:999px;color:#dbe7f7;background:transparent;border:1px solid transparent;cursor:pointer}
+    nav a:hover,nav button:hover,nav a.active{border-color:#438ff588;background:#438ff533;color:#fff}
+    .primary,.btn.primary{background:linear-gradient(135deg,#438ff5,#2865d7)!important;color:white!important}
+    .btn,button{border:0;border-radius:999px;padding:10px 15px;font-weight:700}
+    .ghost{background:#ffffff0b;color:white;border:1px solid var(--line)}
+    .hero{padding:58px 0 42px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .eyebrow{color:var(--mint);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+    h1{font-size:clamp(39px,5.6vw,66px);line-height:1.02;letter-spacing:-.06em;margin:14px 0}
+    h1 span{color:#85baff}
+    h2{font-size:clamp(26px,4vw,37px);letter-spacing:-.04em;margin:5px 0}
+    h3{margin:10px 0}
+    .muted{color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+    .showcase,.card,.panel{border:1px solid var(--line);border-radius:22px;padding:22px;background:linear-gradient(145deg,#17395f,#0c1e36)}
+    .showcase{box-shadow:0 22px 65px #0003}
+    .mini{padding:12px;margin-top:10px;border:1px solid var(--line);border-radius:13px;background:#ffffff0b}
+    .content{padding:32px 0 48px;scroll-margin-top:16px}
+    .section-head{margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card{background:#ffffff08;scroll-margin-top:20px}
+    .card .card-icon{font-size:30px}
+    .card p{font-size:14px;color:var(--muted)}
+    .card button{margin-top:8px}
+    .panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+    label{display:block;margin:12px 0 5px;font-size:13px}
+    input,textarea,select{width:100%;padding:12px;background:#09192d;color:white;border:1px solid var(--line);border-radius:12px}
+    select option{background:#09192d;color:white}
+    textarea{min-height:95px;resize:vertical}
+    .note{font-size:12px;color:var(--muted)}
+    .communication{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:10px 0}
+    .comm-circle{width:145px;min-height:145px;border-radius:50%;border:1px solid #64aaff88;background:radial-gradient(circle at 35% 25%,#1d548b,#0b1b31 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:15px;box-shadow:0 0 22px #2877e833;overflow-wrap:anywhere}
+    .comm-circle .symbol{font-size:27px;line-height:1.2}
+    .comm-circle strong{font-size:13px;margin-top:6px}
+    .comm-circle small{font-size:10px;color:#c4d6ed;margin-top:3px}
+    .comm-circle button{font-size:11px;padding:5px 9px;margin-top:7px}
+    #toast-region{position:fixed;z-index:9999;right:16px;top:16px;width:min(390px,calc(100vw - 32px));display:grid;gap:9px;pointer-events:none}
+    .toast{pointer-events:auto;display:grid;grid-template-columns:30px 1fr 22px;gap:10px;align-items:start;padding:13px;border:1px solid #ffffff2b;border-radius:15px;background:#102640;box-shadow:0 18px 55px #0009;animation:appear .2s ease-out}
+    .mark{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:#438ff533;color:#9fc8ff;font-weight:900}
+    .toast.success .mark{background:#8ce6d033;color:#8ce6d0}
+    .toast.error .mark{background:#ffd43b33;color:#ffd43b}.toast.error strong,.toast.error p{text-transform:uppercase;color:#ffaaaa}
+    .toast strong{display:block;font-size:14px}
+    .toast p{margin:3px 0 0;color:#bdcce0;font-size:12px}
+    .close{background:transparent;color:white;padding:0;font-size:19px}
+    .backdrop{display:none;position:fixed;inset:0;background:#020813dc;z-index:9000;align-items:center;justify-content:center;padding:18px}
+    .backdrop.open{display:flex}
+    .modal{width:min(560px,100%);padding:24px;border:1px solid var(--line);border-radius:22px;background:#102640;max-height:90vh;overflow:auto}
+    .modal-head{display:flex;justify-content:space-between;align-items:center}
+    .modal-head button{background:transparent;color:white;font-size:24px;padding:0}
+    .admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .admin-tile{padding:14px;border:1px solid var(--line);border-radius:13px;background:#ffffff08}
+    .admin-tile strong{display:block;color:#9fc8ff}
+    .admin-tile small{color:var(--muted)}
+    .admin-management{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;min-width:650px}
+    th,td{text-align:left;padding:9px;border-bottom:1px solid var(--line);font-size:13px}
+    footer{padding:23px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .small-badge{display:inline-block;border:1px solid #8ce6d055;background:#8ce6d012;color:var(--mint);border-radius:999px;padding:5px 10px;font-size:11px;font-weight:700}
+    .scbs-video-card{display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden}
+    .scbs-video-frame{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:13px;background:#000}
+    .scbs-video-card h3{overflow-wrap:anywhere;margin:0}
+    .scbs-video-card p{overflow-wrap:anywhere}
+    .scbs-video-category{display:inline-flex;align-self:flex-start;padding:4px 9px;border:1px solid #8ce6d055;border-radius:999px;color:var(--mint);font-size:11px;font-weight:700}
+
+    @keyframes appear{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:900px){header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.panel-grid{grid-template-columns:1fr}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}.comm-circle{width:130px;min-height:130px}nav{gap:4px}nav a,nav button{padding:7px 8px}.admin-grid{grid-template-columns:1fr}.hero{padding-top:36px}}
+/* ==========================================
+   SCBS BOOKSHOP - RESPONSIVE BOOK CARDS
+   ========================================== */
+
+#books .book-search-tools {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-width: 720px;
+  margin: 0 auto 28px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #17395f, #0c1e36);
+}
+
+#books .book-search-tools label {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+#books .book-search-tools input,
+#books .book-search-tools select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #ffffff;
+  color: #152238;
+  font: inherit;
+}
+
+#books .book-search-tools input:focus-visible,
+#books .book-search-tools select:focus-visible {
+  outline: 3px solid #9be564;
+  outline-offset: 2px;
+}
+
+#public-book-status {
+  margin: 18px 0;
+  text-align: center;
+}
+
+#public-book-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+#public-book-list .card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #17395f, #0c1e36);
+  box-shadow: 0 10px 25px #00000020;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+#public-book-list .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px #00000035;
+}
+
+#public-book-list .card > img {
+  display: block;
+  width: 100%;
+  height: 260px;
+  margin: 0 auto 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+#public-book-list .card .card-icon {
+  display: grid;
+  place-items: center;
+  height: 260px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: #ffffff0c;
+  font-size: 56px;
+}
+
+#public-book-list .card h3 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+#public-book-list .card p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#public-book-list .card p:nth-last-of-type(1) {
+  margin-bottom: 12px;
+}
+
+#public-book-list .card /* SCBS Professional Button Styling */
+
+button {
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+/* Smooth hover shine */
+button:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Press effect */
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Keyboard accessibility */
+button:focus-visible {
+  outline: 3px solid #76c442;
+  outline-offset: 3px;
+}
+
+#public-book-list .card button:focus-visible {
+  outline: 3px solid #9be564;
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  #public-book-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #public-book-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  #public-book-list .card {
+    padding: 16px;
+  }
+
+  #public-book-list .card > img,
+  #public-book-list .card .card-icon {
+    height: 240px;
+  }
+
+  #books .book-search-tools {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #public-book-list .card {
+    transition: none;
+  }
+
+  #public-book-list .card:hover {
+    transform: none;
+  }
+}
+
+/* SCBS mobile-money provider choices */
+.scbs-payment-providers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 12px 0 20px;
+}
+
+.scbs-payment-provider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 170px;
+  max-width: 100%;
+  padding: 14px;
+  border: 1px solid #d9dee7;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #fff;
+  color: #172033;
+  box-sizing: border-box;
+}
+
+.scbs-payment-provider:has(input:checked) {
+  border: 2px solid #39823b;
+  background: #f4fff4;
+}
+
+.scbs-provider-logo {
+  display: block;
+  width: 120px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.scbs-payment-provider input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+ /* ==========================================
+   SCBS OWNER PAYMENT SUMMARY CARDS
+   ========================================== */
+
+.scbs-payment-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.scbs-payment-card {
+  background: #ffffff;
+  border: 1px solid #dcefe0;
+  border-top: 4px solid #76c442;
+  border-radius: 16px;
+  padding: 22px 18px;
+  box-shadow: 0 5px 18px rgba(20, 65, 35, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scbs-payment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 24px rgba(20, 65, 35, 0.13);
+}
+
+.scbs-payment-card h4 {
+  margin: 0 0 14px;
+  color: #53635a;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.scbs-payment-card p {
+  margin: 0;
+  color: #173f26;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Pending */
+#admin-payment-pending {
+  color: #b7791f;
+}
+
+/* Successful */
+#admin-payment-successful {
+  color: #218838;
+}
+
+/* Failed */
+#admin-payment-failed {
+  color: #c53030;
+}
+
+/* Payment records table */
+#admin-payment-list {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 18px;
+}
+
+#admin-payment-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f3faf4;
+  color: #183b24;
+}
+
+#admin-payment-list tbody tr {
+  background: #f3faf4;
+}
+
+#admin-payment-list tbody tr:nth-child(even) {
+  background: #e7f3e9;
+}
+
+#admin-payment-list td {
+  color: #183b24;
+}
+
+#admin-payment-list th,
+#admin-payment-list td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5ebe6;
+  text-align: left;
+  white-space: nowrap;
+}
+
+#admin-payment-list th {
+  background: #edf7ee;
+  color: #214d2d;
+  font-weight: 700;
+}
+
+#admin-payment-list tbody tr:hover {
+  background: #f5fbf5;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .scbs-payment-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .scbs-payment-summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .scbs-payment-card {
+    padding: 18px;
+  }
+
+  .scbs-payment-card p {
+    font-size: 1.9rem;
+  }
+} 
+/* SCBS payment summary cards: four colours */
+
+#admin-payment-summary .scbs-payment-card:nth-child(1) {
+  background-color: #e8f1ff;
+  border-top: 5px solid #2563eb;
+}
+
+#admin-payment-summary .scbs-payment-card:nth-child(2) {
+  background-color: #fff4d6;
+  border-top: 5px solid #f59e0b;
+}
+
+#admin-payment-summary .scbs-payment-card:nth-child(3) {
+  background-color: #e3f8e8;
+  border-top: 5px solid #16a34a;
+}
+
+#admin-payment-summary .scbs-payment-card:nth-child(4) {
+  background-color: #ffe7e7;
+  border-top: 5px solid #dc2626;
+}
+/* SCBS Professional Dashboard Shine */
+
+.scbs-payment-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.scbs-payment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+/* Smooth number appearance */
+
+.scbs-payment-card p {
+  font-weight: 800;
+  transition: transform 0.25s ease;
+}
+
+.scbs-payment-card:hover p {
+  transform: scale(1.05);
+}
+
+/* SCBS mobile layout */
+
+@media (max-width: 600px) {
+  .scbs-payment-card {
+    border-radius: 12px;
+    padding: 18px;
+  }
+}
+
+/* SCBS payment action button visibility */
+#admin-payment-list button {
+  background-color: #174d32 !important;
+  color: #ffffff !important;
+  border: 1px solid #174d32 !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#admin-payment-list button:hover {
+  background-color: #236b45 !important;
+  color: #ffffff !important;
+}
+
+/* SCBS OWNER DASHBOARD THEME */
+#admin-dashboard-panel:not([hidden]){display:block;width:calc(100% - 24px);max-width:1700px;box-sizing:border-box;margin:24px auto;padding:clamp(20px,3vw,42px);background:#dff2e4!important;border:2px solid #a8d5b5;border-radius:24px;box-shadow:0 12px 32px rgba(23,77,50,.16)}
+#admin-dashboard-panel:not([hidden]) .admin-management{background:#edf8f0!important;background-image:none!important;border:1px solid #b7d9c0;border-radius:18px;padding:clamp(18px,2vw,30px);margin:0 0 24px;box-shadow:0 4px 14px rgba(23,77,50,.06)}
+#admin-dashboard-panel:not([hidden]) .admin-management h2,#admin-dashboard-panel:not([hidden]) .admin-management h3{color:#174d32}
+@media(max-width:700px){#admin-dashboard-panel:not([hidden]){width:calc(100% - 12px);padding:12px;margin:12px auto;border-radius:14px}#admin-dashboard-panel:not([hidden]) .admin-management{padding:15px}}
+
+/* SCBS DASHBOARD WIDTH FIX */
+#admin-dashboard-panel:not([hidden]){width:calc(100% - 32px)!important;max-width:none!important;margin:24px 16px!important;display:block!important;box-sizing:border-box!important;background:#dff2e4!important;}
+
+    /* Bright SCBS promotion cards with a gentle star-shine effect. */
+    #public-advertisement-list .scbs-promo-card {
+      position: relative; overflow: hidden; isolation: isolate;
+      border: 1px solid rgba(180, 255, 120, .72);
+      background: linear-gradient(135deg, #102d4c, #164c46 55%, #17395f);
+      box-shadow: 0 0 18px rgba(166, 255, 92, .16);
+      animation: scbsPromoGlow 3.2s ease-in-out infinite alternate;
+    }
+    #public-advertisement-list .scbs-promo-card::before {
+      content: '✦  ✧  ✦'; position: absolute; z-index: 2; top: 10px; right: 14px;
+      color: #d8ff8a; letter-spacing: 8px; pointer-events: none;
+      text-shadow: 0 0 8px #b9ff61, 0 0 18px #b9ff61;
+      animation: scbsStarShine 2.4s ease-in-out infinite;
+    }
+    #public-advertisement-list .scbs-promo-card > img {
+      width: 100%; max-height: 280px; object-fit: cover; border-radius: 14px;
+      box-shadow: 0 0 16px rgba(199, 255, 120, .22);
+    }
+    #public-advertisement-list .scbs-promo-badge {
+      display: inline-block; margin: 0 0 8px; padding: 6px 11px; border-radius: 999px;
+      color: #142d16; background: linear-gradient(90deg, #d7ff8c, #fff6a8, #b8ff9a);
+      font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+      box-shadow: 0 0 14px rgba(218, 255, 127, .45);
+    }
+    @keyframes scbsPromoGlow { from { box-shadow: 0 0 10px rgba(166,255,92,.12); } to { box-shadow: 0 0 25px rgba(166,255,92,.32); } }
+    @keyframes scbsStarShine { 0%,100% { opacity:.62; transform:scale(.96); } 50% { opacity:1; transform:scale(1.08); } }
+    @media (prefers-reduced-motion: reduce) {
+      #public-advertisement-list .scbs-promo-card, #public-advertisement-list .scbs-promo-card::before { animation: none; }
+    }
+
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+<style>
+.scbs-announcement-bar{background:#f6d32d;color:#10243b;font-weight:900;text-transform:uppercase;letter-spacing:.04em;padding:14px 18px;border-radius:10px;margin:18px 0}
+.scbs-post-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:18px}
+.scbs-post-card{border:1px solid #d8e0ea;border-radius:14px;padding:18px;background:#fff;color:#17263a;box-shadow:0 5px 18px #0d24400d}
+.scbs-post-card img{width:100%;max-height:280px;object-fit:cover;border-radius:10px;margin-bottom:12px}
+.scbs-post-card h3{margin:.2em 0 .6em}.scbs-post-date{font-size:.86rem;color:#526579}.scbs-create-post-button{background:#1266d4;color:white;font-weight:900;border:0;border-radius:10px;padding:14px 20px;cursor:pointer;margin:12px 0}
+#scbs-create-post-form{display:grid;gap:10px;max-width:760px;padding:18px;border:1px solid #d8e0ea;border-radius:12px;margin:12px 0 24px}
+#scbs-create-post-form input,#scbs-create-post-form textarea,#scbs-create-post-form select{width:100%;padding:10px;border:1px solid #b8c4d3;border-radius:8px}
+.scbs-admin-post-list{display:grid;gap:12px;margin-top:14px}.scbs-admin-post-row{border:1px solid #d8e0ea;border-radius:10px;padding:14px;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.scbs-admin-post-row button{margin:3px}.scbs-post-announcement-label{font-size:.8rem;font-weight:800;color:#805600}
+
+/* SCBS private issue-report feature */
+.scbs-report-float{position:fixed;right:18px;bottom:20px;z-index:1000;background:#ffd43b;color:#17263a;border:2px solid #9b7400;border-radius:999px;padding:14px 18px;font-weight:900;box-shadow:0 8px 26px #10243b33;cursor:pointer}
+.scbs-report-backdrop{position:fixed;inset:0;background:#0b1728aa;z-index:1200;display:grid;place-items:center;padding:16px}.scbs-report-backdrop[hidden]{display:none}
+.scbs-report-dialog{background:#fff;color:#17263a;width:min(100%,600px);max-height:90vh;overflow:auto;border-radius:16px;padding:22px;box-shadow:0 18px 60px #0004}
+.scbs-report-dialog label{display:block;font-weight:700;margin-top:12px}.scbs-report-dialog input,.scbs-report-dialog select,.scbs-report-dialog textarea{display:block;width:100%;padding:11px;border:1px solid #b8c4d3;border-radius:8px;margin-top:5px;box-sizing:border-box}.scbs-report-dialog textarea{min-height:130px}.scbs-report-admin-row{border:1px solid #d8e0ea;border-radius:12px;padding:14px;margin:12px 0}.scbs-report-admin-row p{white-space:pre-wrap;overflow-wrap:anywhere}.scbs-report-admin-row button{margin-top:10px}
+@media(max-width:600px){.scbs-report-float{right:10px;bottom:12px;padding:12px 14px}}
+
+/* SCBS payment action button visibility */
+#admin-payment-list button {
+  background-color: #174d32 !important;
+  color: #ffffff !important;
+  border: 1px solid #174d32 !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#admin-payment-list button:hover {
+  background-color: #236b45 !important;
+  color: #ffffff !important;
+}
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+
+<style id="scbs-customer-login-modal-fix">
+  #login-backdrop { position: fixed; inset: 0; z-index: 5000; display: grid; place-items: center; padding: 18px; overflow-y: auto; background: rgba(8, 18, 32, .78); }
+  #login-backdrop[hidden] { display: none !important; }
+  #login-backdrop .customer-login-panel { box-sizing: border-box; width: min(100%, 480px); max-height: calc(100vh - 36px); overflow-y: auto; padding: 24px; border-radius: 18px; background: #fff; color: #142033; box-shadow: 0 24px 80px rgba(0,0,0,.35); }
+  #login-backdrop .customer-login-panel label { display:block; margin-top:12px; }
+  #login-backdrop .customer-login-panel input { box-sizing:border-box; width:100%; margin-top:5px; padding:11px; }
+  #login-backdrop .customer-login-panel button { cursor:pointer; }
+  #customer-dashboard[hidden] { display:none !important; }
+
+  #login-backdrop { z-index: 10000; background: rgba(3, 10, 22, .78); backdrop-filter: blur(9px); }
+  #login-backdrop .customer-login-panel {
+    width: min(100%, 470px); padding: clamp(22px, 5vw, 34px);
+    border: 1px solid rgba(140,230,208,.3); border-radius: 26px;
+    background: linear-gradient(155deg,#f9fbff 0%,#edf4fc 100%); color:#12223a;
+    box-shadow: 0 30px 100px rgba(0,0,0,.48);
+  }
+  #login-backdrop .customer-login-panel > #close-login {
+    float:right; border:1px solid #d8e2ef; background:#fff; color:#40516a;
+    padding:7px 13px; border-radius:999px; font-size:12px;
+  }
+  .customer-login-brand { display:flex; align-items:center; gap:17px; clear:both; padding:8px 0 18px; }
+  .customer-login-brand img { width:76px; height:76px; flex:0 0 76px; object-fit:cover; border-radius:50%; border:3px solid #fff; box-shadow:0 6px 22px #17395f2b; background:#102640; }
+  .customer-login-kicker { display:block; color:#237b77; font-size:10px; font-weight:800; letter-spacing:.12em; line-height:1.4; }
+  .customer-login-brand h3 { color:#102640; margin:5px 0 2px; font-size:25px; letter-spacing:-.04em; }
+  .customer-login-brand p { color:#64748b; font-size:13px; margin:0; }
+  #login-backdrop .customer-login-panel label { color:#24364e; font-weight:700; margin-top:14px; }
+  #login-backdrop .customer-login-panel input { color:#142238; background:#fff; border:1px solid #ccd8e7; border-radius:12px; padding:12px 13px; }
+  #login-backdrop .customer-login-panel input:focus { outline:3px solid #438ff533; border-color:#438ff5; }
+  #login-backdrop .customer-login-panel button.primary { width:100%; margin-top:18px; padding:13px 16px; border-radius:13px; }
+  #login-backdrop .customer-login-panel .customer-register-prompt { color:#5b6b80; text-align:center; font-size:13px; margin:16px 0 0; }
+  #login-backdrop .customer-login-panel .secondary { background:#e4edf8; color:#1c426c; border:1px solid #d0deee; padding:9px 13px; }
+  #customer-login-status, #customer-register-status { color:#334155; font-size:13px; overflow-wrap:anywhere; }
+  .customer-profile-header { display:flex; align-items:center; gap:20px; padding:24px; margin:18px 0; border:1px solid #438ff54a; border-radius:24px; background:linear-gradient(125deg,#17395f,#0c1e36 72%); box-shadow:0 18px 45px #0002; }
+  .customer-dashboard-avatar { width:112px; height:112px; flex:0 0 112px; object-fit:cover; border-radius:50%; border:4px solid #d8f8f0; outline:1px solid #8ce6d088; box-shadow:0 8px 25px #0004; background:#102640; }
+  #customer-dashboard-name { margin:0 0 4px; font-size:clamp(21px,3vw,29px); color:#fff; }
+  #customer-dashboard-email, #customer-dashboard-code { margin:3px 0; color:#c6d7eb; overflow-wrap:anywhere; }
+  #customer-dashboard > nav { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; padding:12px; border:1px solid #ffffff20; border-radius:18px; background:#ffffff07; }
+  #customer-dashboard > nav button { background:#ffffff0b; color:#e8f1ff; border:1px solid #ffffff20; }
+  #customer-dashboard > nav button:hover, #customer-dashboard > nav button:focus-visible { background:#438ff533; border-color:#438ff5; }
+  #customer-dashboard [id^="customer-panel-"] { margin-top:16px; padding:clamp(16px,3vw,24px); border:1px solid #ffffff1e; border-radius:20px; background:#ffffff06; }
+  @media(max-width:560px) {
+    .customer-login-brand { align-items:flex-start; gap:12px; }
+    .customer-login-brand img { width:62px; height:62px; flex-basis:62px; }
+    .customer-login-brand h3 { font-size:22px; }
+    .customer-profile-header { padding:17px; gap:14px; }
+    .customer-dashboard-avatar { width:82px; height:82px; flex-basis:82px; }
+  }
+
+/* SCBS payment action button visibility */
+#admin-payment-list button {
+  background-color: #174d32 !important;
+  color: #ffffff !important;
+  border: 1px solid #174d32 !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#admin-payment-list button:hover {
+  background-color: #236b45 !important;
+  color: #ffffff !important;
+}
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+
+<style>
+/* SCBS AI assistant floating chat */
+#scbs-ai-launcher{position:fixed;right:18px;top:auto;bottom:82px;left:auto;z-index:8000;border:0;border-radius:999px;padding:14px 19px;background:linear-gradient(135deg,#76c442,#4d9e27);color:#071426;font-weight:800;box-shadow:0 10px 30px #0006}
+#scbs-ai-panel{position:fixed;right:22px;bottom:88px;z-index:8001;width:min(390px,calc(100vw - 28px));height:min(560px,calc(100vh - 125px));display:flex;flex-direction:column;overflow:hidden;border:1px solid #ffffff35;border-radius:20px;background:#0c1e36;box-shadow:0 20px 65px #0009}
+#scbs-ai-panel[hidden]{display:none!important}
+.scbs-ai-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 17px;background:#17395f;border-bottom:1px solid #ffffff24}
+.scbs-ai-head strong{display:block}
+.scbs-ai-head small{color:#c7d8ee;font-size:12px}
+#scbs-ai-close{background:transparent;color:white;font-size:24px;padding:2px 8px}
+#scbs-ai-messages{display:flex;flex:1;flex-direction:column;gap:10px;overflow-y:auto;padding:14px}
+.scbs-ai-msg{max-width:90%;padding:10px 12px;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+.scbs-ai-msg.assistant{align-self:flex-start;background:#17395f;color:#f5f8ff}
+.scbs-ai-msg.user{align-self:flex-end;background:#d8f6bd;color:#10210b}
+#scbs-ai-form{padding:12px;border-top:1px solid #ffffff24}
+#scbs-ai-question{min-height:78px;resize:vertical}
+#scbs-ai-send{width:100%;margin-top:8px;background:#76c442;color:#071426}
+#scbs-ai-status{min-height:18px;padding:0 12px 10px;color:#c3d2e6;font-size:12px}
+@media(max-width:560px){
+#scbs-ai-launcher{right:175px;bottom:12px;padding:12px 14px}
+#scbs-ai-panel{right:10px;bottom:76px;width:calc(100vw - 20px);height:min(560px,calc(100vh - 100px))}
+}
+
+/* SCBS payment action button visibility */
+#admin-payment-list button {
+  background-color: #174d32 !important;
+  color: #ffffff !important;
+  border: 1px solid #174d32 !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#admin-payment-list button:hover {
+  background-color: #236b45 !important;
+  color: #ffffff !important;
+}
+
+/* SCBS DASHBOARD FINAL GREEN OVERRIDE */
+/* SCBS DASHBOARD VISIBLE GREEN THEME */
+#admin-dashboard-panel:not([hidden]){display:block!important;width:calc(100% - 20px)!important;max-width:1700px!important;box-sizing:border-box!important;margin:24px auto!important;padding:clamp(20px,3vw,42px)!important;background:#dff2e4!important;border:2px solid #a8d5b5!important;border-radius:24px!important;box-shadow:0 12px 32px rgba(23,77,50,.16)!important}
+#admin-dashboard-panel:not([hidden]) .admin-management{background:#edf8f0!important;background-image:none!important;border:1px solid #b7d9c0!important;border-radius:18px!important;padding:clamp(18px,2vw,30px)!important;margin:0 0 24px!important;box-shadow:0 4px 14px rgba(23,77,50,.06)!important}
+#admin-dashboard-panel:not([hidden]) .admin-management h2,#admin-dashboard-panel:not([hidden]) .admin-management h3{color:#174d32!important}
+@media(max-width:700px){#admin-dashboard-panel:not([hidden]){width:calc(100% - 12px)!important;padding:12px!important;margin:12px auto!important;border-radius:14px!important}}
+
+#admin-dashboard-panel:not([hidden]){display:block;width:calc(100% - 20px)!important;max-width:1700px!important;box-sizing:border-box!important;margin:24px auto!important;padding:clamp(20px,3vw,42px)!important;background:#dff2e4!important;border:2px solid #a8d5b5!important;border-radius:24px!important;box-shadow:0 12px 32px rgba(23,77,50,.16)!important}
+#admin-dashboard-panel:not([hidden]) .admin-management{background:#f0faf2!important;border:1px solid #b7d9c0!important;border-radius:18px!important;padding:clamp(18px,2vw,30px)!important;margin-bottom:24px!important}
+#admin-dashboard-panel:not([hidden]) .admin-management h2,#admin-dashboard-panel:not([hidden]) .admin-management h3{color:#174d32!important}
+@media(max-width:700px){#admin-dashboard-panel:not([hidden]){width:calc(100% - 12px)!important;padding:12px!important;margin:12px auto!important;border-radius:14px!important}}
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+<style>
+/* SCBS DASHBOARD PARENT WIDTH FIX */
+#admin-backdrop:has(#admin-dashboard-panel:not([hidden])){align-items:flex-start!important;overflow-y:auto!important;}
+#admin-backdrop:has(#admin-dashboard-panel:not([hidden])) .modal{width:calc(100vw - 36px)!important;max-width:1700px!important;max-height:calc(100vh - 36px)!important;margin:18px auto!important;box-sizing:border-box!important;}
+#admin-dashboard-panel:not([hidden]){width:100%!important;max-width:none!important;box-sizing:border-box!important;background:#d5f0dc!important;border:2px solid #77b889!important;border-radius:18px!important;padding:24px!important;}
+#admin-dashboard-panel .admin-management{background:#e5f6e9!important;border:1px solid #91c9a0!important;border-radius:16px!important;padding:20px!important;box-sizing:border-box!important;}
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+
+<style>
+/* SCBS FINAL NAVY AND APPLE GREEN THEME */
+#admin-dashboard-panel:not([hidden]){background:#e8f7e9!important;color:#102640!important;border:2px solid #76c442!important;}
+#admin-dashboard-panel:not([hidden]) .admin-management{background:#f7fff5!important;background-image:none!important;color:#102640!important;border:1px solid #b5dda9!important;box-shadow:0 5px 18px rgba(25,70,35,.09)!important;}
+#admin-dashboard-panel:not([hidden]) .admin-management h2,#admin-dashboard-panel:not([hidden]) .admin-management h3{color:#174d32!important;}
+#admin-dashboard-panel:not([hidden]) .admin-tile{background:#102640!important;border:1px solid #76c442!important;border-radius:14px!important;padding:16px!important;}
+#admin-dashboard-panel:not([hidden]) .admin-tile strong{color:#a4e66e!important;}
+#admin-dashboard-panel:not([hidden]) .admin-tile small{color:#e1eddf!important;}
+#admin-dashboard-panel:not([hidden]) button{visibility:visible;}
+#admin-dashboard-panel:not([hidden]) button.primary{background:#76c442!important;color:#102640!important;border:1px solid #4e9a27!important;font-weight:800!important;}
+#admin-dashboard-panel:not([hidden]) button.ghost{background:#102640!important;color:#fff!important;border:1px solid #76c442!important;}
+#admin-dashboard-panel:not([hidden]) input,#admin-dashboard-panel:not([hidden]) select,#admin-dashboard-panel:not([hidden]) textarea{background:#fff!important;color:#102640!important;border:1px solid #a8cda0!important;}
+#admin-dashboard-panel:not([hidden]) table{background:#fff!important;color:#102640!important;}
+#admin-dashboard-panel:not([hidden]) th{background:#d9f2d2!important;color:#174d32!important;}
+#admin-dashboard-panel:not([hidden]) td{color:#102640!important;}
+
+
+/* SCBS rental tool pictures */
+.rental-tool-thumbnail {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.rental-tool-image {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0 0 12px;
+  background: #f2f4f5;
+}
+
+@media (max-width: 600px) {
+  .rental-tool-image {
+    max-width: 100%;
+    height: 170px;
+  }
+}
+
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+<style>
+/* SCBS Customer Community — compact composer and public feed */
+.scbs-customer-post-compose{margin:14px 0 20px;padding:16px;border:1px solid #438ff54a;border-radius:16px;background:linear-gradient(125deg,#17395f,#0c1e36 80%);color:#f5f8ff}
+.scbs-customer-post-compose h3{margin:0 0 5px}.scbs-customer-post-compose p{margin:5px 0 10px;color:#c6d7eb}
+.scbs-customer-post-compose textarea{display:block;width:100%;min-height:78px;resize:vertical;padding:12px;border:1px solid #ffffff2b;border-radius:12px;background:#09192d;color:#fff;box-sizing:border-box}
+.scbs-customer-post-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px}
+.scbs-customer-photo-label{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border:1px solid #8ce6d077;border-radius:999px;color:#8ce6d0;cursor:pointer;font-weight:700}
+.scbs-customer-contact-consent{display:flex;align-items:flex-start;gap:8px;max-width:100%;font-size:12px;color:#d5e4f5}.scbs-customer-contact-consent input{width:auto;margin-top:3px}
+.scbs-customer-post-submit{background:#8ce6d0;color:#071426;font-weight:900}.scbs-customer-post-compose [role=status]{font-size:13px;overflow-wrap:anywhere}
+#scbs-customer-public-posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin:16px 0}
+.scbs-community-card{min-width:0;padding:16px;border:1px solid #ffffff20;border-radius:16px;background:linear-gradient(145deg,#17395f,#0c1e36);color:#f5f8ff;overflow-wrap:anywhere}
+.scbs-community-author{display:flex;align-items:center;gap:10px;margin-bottom:12px}.scbs-community-avatar{width:46px;height:46px;flex:0 0 46px;border-radius:50%;object-fit:cover;border:2px solid #8ce6d0;background:#102640}.scbs-community-author strong{display:block}.scbs-community-date{font-size:11px;color:#b9cbe0}.scbs-community-body{white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0}.scbs-community-photo{display:block;width:100%;max-height:340px;object-fit:contain;border-radius:12px;margin:10px 0;background:#09192d}.scbs-community-contact{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;margin-top:12px}.scbs-community-contact a{color:#8ce6d0;text-decoration:underline}.scbs-community-delete{margin-top:12px;background:#ffffff12;color:#fff;border:1px solid #ffffff30}
+@media(max-width:560px){.scbs-customer-post-compose{padding:12px}.scbs-customer-post-actions{align-items:stretch}.scbs-customer-post-submit{width:100%}}
+
+/* SCBS BOOK LOGISTICS UI */
+.scbs-logistics-section{padding:28px 0 40px}.scbs-logistics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}.scbs-logistics-card,.scbs-logistics-booking-panel,.scbs-logistics-admin{background:var(--panel,#102640);border:1px solid var(--line,#ffffff24);border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.scbs-logistics-card h3{margin:8px 0}.scbs-logistics-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:#0b1728}.scbs-logistics-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scbs-logistics-images figure{margin:0}.scbs-logistics-images figcaption{font-size:.8rem;color:var(--muted,#aebed3)}.scbs-logistics-price,.scbs-logistics-estimate{font-weight:800;color:var(--mint,#8ce6d0)}.scbs-logistics-booking-panel{max-width:760px;margin:22px auto}.scbs-logistics-booking-panel form,.scbs-logistics-admin-form{display:grid;gap:8px}.scbs-logistics-booking-panel input,.scbs-logistics-booking-panel textarea,.scbs-logistics-admin input,.scbs-logistics-admin textarea,.scbs-logistics-admin select{width:100%;padding:11px;border:1px solid var(--line,#ffffff24);border-radius:9px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);margin-bottom:8px}.scbs-logistics-actions{display:flex;flex-wrap:wrap;gap:10px}.scbs-logistics-admin{margin:16px 0}.scbs-logistics-admin-list,.scbs-logistics-bookings-list{display:grid;gap:12px;margin:12px 0 24px}.scbs-logistics-admin-item,.scbs-logistics-booking-item{border:1px solid var(--line,#ffffff24);border-radius:12px;padding:14px;overflow-wrap:anywhere}.scbs-logistics-admin-item button,.scbs-logistics-booking-item select{margin:5px}.scbs-logistics-booking-item select{padding:8px;background:var(--panel2,#0c1e36);color:var(--text,#f5f8ff);border-radius:8px}.scbs-logistics-admin h3{margin-top:24px}.scbs-logistics-section label,.scbs-logistics-booking-panel label,.scbs-logistics-admin label{display:block;font-weight:650}.scbs-logistics-card button{margin-top:10px}
+
+  </style>
+
+</head>
+<body>
+  <div id="toast-region" role="status" aria-live="polite"></div>
+  <button type="button" class="scbs-report-float" id="scbs-report-open">  REPORT AN ISSUE</button>
+  <div class="scbs-report-backdrop" id="scbs-report-backdrop" hidden>
+    <section class="scbs-report-dialog" role="dialog" aria-modal="true" aria-labelledby="scbs-report-title">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><h2 id="scbs-report-title">Report an Issue</h2><button type="button" id="scbs-report-close" aria-label="Close report form">x</button></div>
+      <p>Submit a concern privately to the SCBS team. Do not include passwords, PINs, or payment card details.</p>
+      <form id="scbs-report-form">
+        <label for="scbs-report-name">Your name</label><input id="scbs-report-name" maxlength="100" required autocomplete="name">
+        <label for="scbs-report-contact">Phone number or email for follow-up</label><input id="scbs-report-contact" maxlength="254" required autocomplete="email">
+        <label for="scbs-report-category">Issue category</label><select id="scbs-report-category" required><option value="">Choose a category</option><option>Suspicious activity</option><option>Technical problem</option><option>Order or payment</option><option>Other</option></select>
+        <label for="scbs-report-description">Describe the issue</label><textarea id="scbs-report-description" minlength="10" maxlength="3000" required></textarea>
+        <button type="submit" class="primary" id="scbs-report-submit">Submit report privately</button><p id="scbs-report-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#home" aria-label="SCBS home">
+        <span class="logo">S</span>
+        <span>SCBS<small>SERGIO CHABU BUSINESS SYSTEM</small></span>
+      </a>
+      <nav aria-label="Main navigation">
+  <a href="#home">&#8962; Home</a>
+<a href="#products">&#128722; Products</a>
+<a href="#phones">&#128241; Phones</a>
+<a href="#services">&#128187; Services</a>
+<a href="#rentals">&#128295; Tools &amp; Software</a>
+<a href="#books">&#128218; SCBS Books</a>
+<a href="#ads">&#128226; Promotions</a>
+<a href="#videos">&#127909; SCBS Videos</a>
+<a href="#posts">&#128196; SCBS Posts</a>
+<a href="#book-logistics">&#128666; BOOK LOGISTICS</a>
+<a href="#contact">&#128172; Contact</a>
+  <button class="primary" id="admin-open" type="button" aria-label="Open Owner Dashboard" title="Owner Dashboard">&#128274; </button>
+</nav>
+
+    </header>
+
+    <main>
+      <!-- SCBS BOOK LOGISTICS PUBLIC TAB -->
+      <section id="book-logistics" class="content-section scbs-logistics-section">
+        <div class="section-heading"><p class="eyebrow">Transport & cargo</p><h2>BOOK LOGISTICS</h2><p class="muted">Explore available carriers and submit a cargo booking request. Prices are estimates until confirmed by SCBS.</p></div>
+        <p id="scbs-logistics-status" class="muted" role="status" aria-live="polite">Loading available logistics...</p>
+        <div id="scbs-logistics-list" class="scbs-logistics-grid"></div>
+        <div id="scbs-logistics-booking-panel" class="scbs-logistics-booking-panel" hidden>
+          <h3>Request a logistics booking</h3><p id="scbs-logistics-selected" class="muted"></p>
+          <form id="scbs-logistics-booking-form">
+            <input type="hidden" id="scbs-logistics-id" name="logistics_id">
+            <label for="scbs-logistics-customer-name">Your full name</label><input id="scbs-logistics-customer-name" name="customer_name" maxlength="120" autocomplete="name" required>
+            <label for="scbs-logistics-customer-email">Email address</label><input id="scbs-logistics-customer-email" name="customer_email" type="email" maxlength="254" autocomplete="email" required>
+            <label for="scbs-logistics-customer-phone">Phone number</label><input id="scbs-logistics-customer-phone" name="customer_phone" type="tel" maxlength="40" autocomplete="tel" required>
+            <label for="scbs-logistics-weight">Cargo weight (kg)</label><input id="scbs-logistics-weight" name="weight_kg" type="number" min="0.1" max="1000000" step="0.1" required>
+            <label for="scbs-logistics-notes">Cargo details / collection and destination notes (optional)</label><textarea id="scbs-logistics-notes" name="notes" maxlength="1000" rows="3" placeholder="Describe your cargo and collection/delivery locations"></textarea>
+            <p id="scbs-logistics-estimate" class="scbs-logistics-estimate">Estimated total: —</p>
+            <div class="scbs-logistics-actions"><button class="primary" type="submit" id="scbs-logistics-submit">Submit booking request</button><button class="ghost" type="button" id="scbs-logistics-cancel">Cancel</button></div>
+            <p id="scbs-logistics-booking-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="posts" class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">SCBS Updates</p>
+          <h2>SCBS Posts & Announcements</h2>
+          <p class="muted">Updates published by Sergio Chabu Business System.</p>
+        </div>
+        <div id="scbs-announcement-bar" class="scbs-announcement-bar" hidden aria-live="polite"></div>
+        <p id="scbs-posts-status" class="muted" role="status">Loading SCBS posts...</p>
+        <div id="scbs-public-posts" class="scbs-post-grid"></div>
+        <h3>Customer Community Posts</h3>
+        <p class="muted">Customers can share updates, ask for help, and optionally share their contact details.</p>
+        <p id="scbs-customer-posts-status" class="muted" role="status" aria-live="polite">Loading customer posts...</p>
+        <div id="scbs-customer-public-posts" aria-live="polite"></div>
+      </section>
+
+      <section class="hero active" id="home">
+        <div>
+          <div class="eyebrow">ZAMBIAN TECHNOLOGY | COMMERCE | INNOVATION</div>
+
+<h1>
+  Business meets<br>
+  <span>technology.</span>
+</h1>
+
+<p class="muted">
+  Welcome to Sergio Chabu Business System (SCBS) - a growing platform
+  connecting products, technology services, equipment rentals,
+  publications and business promotions in one place.
+</p>
+
+<div class="actions">
+  <a class="btn primary" href="#products">Explore Our Platform -></a>
+  <button class="ghost" id="hero-contact" type="button">Talk to SCBS</button>
+</div>
+
+<p class="note">
+  Built around practical solutions, customer service and continuous innovation.
+</p>
+
+<span class="small-badge">TECHNOLOGY | BUSINESS | IDEAS</span>
+        </div>
+        <div class="showcase">
+          <div class="eyebrow">SCBS / Your platform</div>
+          <h2>One business.<br>Many possibilities.</h2>
+          <div class="mini"> <b>Products & essentials</b><br><span class="muted">Groceries, phones and accessories</span></div>
+          <div class="mini"> <b>Services & rentals</b><br><span class="muted">Technology support and tools</span></div>
+          <div class="mini"> <b>SCBS Books</b><br><span class="muted">Original stories and learning</span></div>
+        </div>
+      </section>
+      <!-- SCBS PUBLIC SEARCH -->
+<div id="scbs-public-search" class="content">
+  <div class="card">
+    <div class="eyebrow">Find what you need</div>
+    <h2>Search SCBS</h2>
     <p class="muted">
-      SCBS brings products, technology services, customer support and business solutions
-      together in one growing platform.
+      Search products, phones, accessories, services and books.
     </p>
 
-    <div class="hero-actions">
-      <button class="primary" onclick="show('products')">Explore Products</button>
-      <button onclick="show('services')">View Services</button>
-      <button onclick="show('contact')">Talk to SCBS</button>
-    </div>
+    <form id="scbs-public-search-form" role="search">
+      <label for="scbs-public-search-input">Search SCBS</label>
+
+      <div class="actions">
+        <input
+          id="scbs-public-search-input"
+          type="search"
+          placeholder="Try Samsung, groceries, repairs or books..."
+          maxlength="100"
+          autocomplete="off"
+          style="flex:1; min-width:220px;"
+        >
+
+        <button type="submit" class="primary">Search</button>
+        <button type="button" class="ghost" id="scbs-public-search-clear">
+          Clear
+        </button>
+      </div>
+    </form>
+
+    <p id="scbs-public-search-status" class="muted"
+       role="status" aria-live="polite"></p>
+
+    <div id="scbs-public-search-results" class="grid"></div>
   </div>
+</section>
+<!-- END SCBS PUBLIC SEARCH -->
+      </div>      
+<div class="section-head"><div class="eyebrow">Explore</div><h2>Products & Essentials</h2><p class="muted">Groceries, household goods, phones and everyday products.</p></div>
+        <div class="grid" id="products-explore-cards">
+  <article class="card">
+    <div class="card-icon"></div>
+    <h3>Groceries & Essentials</h3>
+    <p>Explore groceries, household goods and everyday needs.</p>
+    <button class="ghost" type="button" data-open-products>
+      Explore products
+    </button>
+  </article>
 
-  <div class="grid">
-    <div class="card">
-      <h3>🛒 Products & Accessories</h3>
-      <p>Explore products and accessories available through SCBS.</p>
-      <button onclick="show('products')">What's Available</button>
-    </div>
+  <article class="card">
+    <div class="card-icon"></div>
+    <h3>Products & Stock</h3>
+    <p>Browse listed products and check their displayed prices and availability.</p>
+    <button class="ghost" type="button" data-open-products>
+      Browse available stock
+    </button>
+  </article>
 
-    <div class="card">
-      <h3>💻 Technology Services</h3>
-      <p>Explore computer, software and authorized technology services.</p>
-      <button onclick="show('services')">View Services</button>
-    </div>
+  <article class="card">
+    <div class="card-icon"></div>
+    <h3>More Essentials</h3>
+    <p>Discover other products currently listed by SCBS.</p>
+    <button class="ghost" type="button" data-open-products>
+      Explore extras
+    </button>
+  </article>
+</div>       <div class="section-head">
+          <h2>Available Products</h2>
+          <p class="muted">Products and prices managed by SCBS.</p>
+        </div>
 
-    <div class="card">
-      <h3>🔧 Repair Services</h3>
-      <p>Technology repair and system support for customers.</p>
-      <button onclick="show('services')">Explore Services</button>
-    </div>
-  </div>
+        <p id="public-product-status" class="muted" role="status">
+          Loading products...
+        </p>
 
-  <div class="card">
-    <h3>📢 Latest SCBS Advertisements</h3>
-    <div id="homeAds" class="grid"></div>
-  </div>
-
-  <div class="card">
-    <h3>🌍 Growing Beyond Zambia</h3>
-    <p>
-      SCBS is being developed as a long-term multi-service business platform,
-      with future plans for wider product sourcing, online services and physical SCBS shops.
+        <div id="public-product-list" class="grid"></div>
+<!-- SCBS CUSTOMER SHOPPING CART -->
+<section id="scbs-shopping-cart" class="card" style="margin-top:24px;">
+  <div class="section-head">
+    <div class="eyebrow">Customer shopping</div>
+    <h2> Your Shopping Cart</h2>
+    <p class="muted">
+      Review your products before placing an order.
     </p>
   </div>
-</section>
-<section id="products" class="hidden"><h2>What's Available</h2><div id="productsList" class="grid"></div></section>
-<section id="services" class="hidden"><h2>Multi-Tech Services</h2><div id="servicesList" class="grid"></div></section><section id="tool-rentals" class="hidden">
-  <h2>🔧 Tool Rentals</h2>
-  <p>Authorized service tools available for hourly rental.</p>
-  <div id="toolRentalsList" class="grid"></div>
-</section>
-<section id="ads" class="hidden"><h2>Advertisements</h2><div id="adsList" class="grid"></div></section>
-<section id="contact" class="hidden"><h2>Talk to SCBS</h2><form id="msg"><input name="customer_name" placeholder="Your name" required><input name="customer_contact" placeholder="Phone or email" required><textarea name="message" placeholder="How can we help?" required></textarea><button class="primary">Send Message</button></form><p id="msgStatus"></p></section>
-<section id="admin" class="hidden">
-  <h2>SCBS Owner Dashboard</h2>
 
-  <div id="login">
-    <form id="loginForm">
-      <input name="email" type="email" placeholder="Admin email" required>
-      <input name="password" type="password" placeholder="Password" required>
-      <button class="primary">Login</button>
-    </form>
-    <p id="loginStatus"></p>
+  <p id="scbs-cart-status" class="muted" role="status">
+    Your cart is empty.
+  </p>
+
+  <div id="scbs-cart-items"></div>
+
+  <div class="section-head">
+    <h3>
+      Total: <span id="scbs-cart-total">ZMW 0.00</span>
+    </h3>
   </div>
 
-  <div id="dash" class="hidden">
+  <label for="scbs-delivery-address">
+    Select delivery address
+  </label>
 
-    <div class="admin-header">
-      <div>
-        <h2>Welcome to SCBS Owner Dashboard</h2>
-        <p>Signed in as <b id="adminEmail"></b></p>
-      </div>
-      <button onclick="logout()">Log out</button>
-    </div>
+  <select id="scbs-delivery-address">
+    <option value="">Load your saved addresses</option>
+  </select>
 
-    <div class="dashboard-grid">
-
-      <div class="dashboard-card">
-        <h3>🛒 Products</h3>
-        <p>Manage groceries and other products.</p>
-        <button onclick="document.getElementById('productForm').scrollIntoView()">Manage Products</button>
-      </div>
-
-      <div class="dashboard-card">
-        <h3>🛠️ Services</h3>
-        <p>Manage SCBS technology and business services.</p>
-        <button onclick="document.getElementById('serviceForm').scrollIntoView()">Manage Services</button>
-      </div>
-
-      <div class="dashboard-card">
-        <h3>📢 Advertisements</h3>
-        <p>Create promotions and announcements.</p>
-        <button onclick="document.getElementById('adForm').scrollIntoView()">Manage Ads</button>
-      </div>
-
-      <div class="dashboard-card">
-        <h3>💬 Customer Messages</h3>
-        <p>View customer requests and messages.</p>
-        <button onclick="document.getElementById('messages').scrollIntoView()">View Messages</button>
-      </div>
-
-    </div>
-
-    <hr>
-
-    <h3>➕ Add Product</h3>
-    <form id="productForm">
-      <input name="name" placeholder="Product name" required>
-<input name="category" placeholder="Category" required>
-<input name="price" type="number" step="0.01" placeholder="Price" required>
-<input name="stock" type="number" min="0" placeholder="Stock quantity" required>
-<input name="image_url" placeholder="Image URL">
-<textarea name="description" placeholder="Description"></textarea>
-<button class="primary">Add Product</button>
-      <button class="primary">Add Product</button>
-    </form>
-
-    <h3>🛠️ Add Service</h3>
-    <form id="serviceForm">
-      <input name="name" placeholder="Service name" required>
-      <textarea name="description" placeholder="Description"></textarea>
-      <button class="primary">Add Service</button>
-    </form>
-<h3>🔧 Add Tool Rental</h3>
-<form id="toolRentalForm">
-  <input name="name" placeholder="Tool name" required>
-
-  <input
-    name="category"
-    placeholder="Category"
-    value="Authorized Service Tool"
-    required
-  >
-
-  <input
-    name="hourly_rate"
-    type="number"
-    step="0.01"
-    min="0"
-    placeholder="Hourly rental price"
-    required
-  >
-
-  <input name="image_url" placeholder="Image URL">
+  <label for="scbs-order-notes">
+    Order notes (optional)
+  </label>
 
   <textarea
-    name="description"
-    placeholder="Tool description"
+    id="scbs-order-notes"
+    maxlength="1000"
+    rows="3"
+    placeholder="Add delivery instructions for this order..."
   ></textarea>
 
-  <button class="primary">Add Tool Rental</button>
-</form>
-    <h3>📢 Add Advertisement</h3>
-    <form id="adForm">
-      <input name="title" placeholder="Title" required>
-      <input name="image_url" placeholder="Image URL">
-      <textarea name="body" placeholder="Advertisement text"></textarea>
-      <button class="primary">Post Advertisement</button>
+  <button id="scbs-place-order" class="primary" type="button">
+    Place Order
+  </button>
+</section>
+<!-- END SCBS CUSTOMER SHOPPING CART -->
+      </section>
+
+      <section class="content" id="services">
+        <div class="section-head"><div class="eyebrow">Technology & support</div><h2>Multi-Tech and General Services</h2><p class="muted">Technology support and practical services for everyday needs.</p></div>
+        <div class="grid">
+          <article class="card"><div class="card-icon">??</div><h3>Technology support</h3><p>Device support and software troubleshooting.</p><button class="ghost action" data-title="Multi-Tech services" data-msg="Contact SCBS to ask about service availability and pricing.">View services</button></article>
+          <article class="card" id="phones"><div class="card-icon"></div><h3>Phones & Accessories</h3><p>Phones, chargers, earphones, cases and cables.</p><button class="ghost action" data-title="Phones & accessories" data-msg="Contact SCBS to confirm available devices and accessories.">Browse devices</button></article>
+          <article class="card" id="rentals"><div class="card-icon"></div><h3>Tool Rentals</h3><p>Rental tools and equipment requests.</p><button class="ghost" id="open-public-rentals" type="button">
+  View rental tools
+</button></article>
+        </div>
+          <div class="section-head">
+          <h2>Available Multi-Tech Services</h2>
+          <p class="muted">
+            Explore our available services and their prices.
+          </p>
+        </div>
+
+        <p id="public-service-status" class="muted" role="status">
+          Loading services...
+        </p>
+
+        <div id="public-service-list" class="grid"></div>
+      </section>
+
+   <section class="content" id="books">
+  <div class="section-head">
+    <div class="eyebrow">Create and publish</div>
+    <h2>SCBS Books</h2>
+    <p class="muted">
+      Discover original stories, educational books and ideas from SCBS.
+    </p>
+  </div>
+
+  <p id="public-book-status" class="muted" role="status">
+    Loading published books...
+  </p>
+
+  <div class="book-search-tools">
+  <label for="public-book-search">Search SCBS Books</label>
+
+  <input
+    type="search"
+    id="public-book-search"
+    placeholder="Search by title, author, or description..."
+    autocomplete="off"
+  >
+
+  <label for="public-book-category">Browse by category</label>
+
+  <select id="public-book-category">
+    <option value="">All categories</option>
+  </select>
+</div><div id="public-book-list" class="grid"></div>
+</section>
+
+<section class="content" id="ads">
+  <div class="section-head" id="public-advertisements-heading">
+    <h2>Advertisements &amp; Promotions</h2>
+    <p class="muted">
+      Discover the latest offers and announcements from SCBS.
+    </p>
+  </div>
+
+  <p id="public-advertisement-status" class="muted" role="status">
+    Loading promotions...
+  </p>
+
+  <div id="public-advertisement-list" class="grid"></div>
+</section>
+
+<section class="content" id="videos">
+  <div class="section-head">
+    <div class="eyebrow">SCBS learning centre</div>
+    <h2>SEARCH SCBS VIDEOS</h2>
+    <p class="muted">Search short practical tutorials for phones, computers and technology. Videos are hosted by YouTube and play here on SCBS.</p>
+  </div>
+  <div class="book-search-tools">
+    <label for="scbs-video-search">Search by title or topic</label>
+    <input id="scbs-video-search" type="search" placeholder="e.g. Turn TalkBack off, restart a PC..." autocomplete="off">
+    <label for="scbs-video-category">Browse by category</label>
+    <select id="scbs-video-category"><option value="">All categories</option></select>
+  </div>
+  <p id="scbs-public-videos-status" class="muted" role="status" aria-live="polite">Loading SCBS videos...</p>
+  <div id="scbs-public-video-list" class="grid"></div>
+</section>
+
+      <section class="content" id="contact">
+        <div class="eyebrow">Communication</div>
+        <h2>Connect with SCBS</h2>
+        <p class="muted">Contact SCBS directly, or send a message to the SCBS team.</p>
+        <div class="communication">
+          <div class="comm-circle"><span class="symbol"></span><strong>WhatsApp</strong><small>0967575366</small><button class="ghost" id="whatsapp" type="button">Contact</button></div>
+          <div class="comm-circle"><span class="symbol"></span><strong>Call SCBS</strong><small>0967575366</small><button class="ghost" id="call" type="button">Call</button></div>
+          <div class="comm-circle"><span class="symbol"></span><strong>Email</strong><small>chabuemmanuel6@gmail.com</small><button class="ghost" id="email" type="button">Email</button></div>
+          <div class="comm-circle"><span class="symbol">f</span><strong>Facebook</strong><small>emmanuel.chabu.92</small><button class="ghost" id="facebook" type="button">Open</button></div>
+          <div class="comm-circle"><span class="symbol"></span><strong>Instagram</strong><small>@sergiochabu</small><button class="ghost" id="instagram" type="button">Open</button></div>
+          <div class="comm-circle"><span class="symbol"></span><strong>YouTube</strong><small>Find SCBS on YouTube</small><button class="ghost" id="youtube" type="button">Search</button></div>
+        </div>
+        <div class="panel" style="margin-top:18px;max-width:760px">
+          <h3> Send a Message</h3>
+          <p class="muted">For product purchases, place an order from Products. Use this form for messages to the SCBS team.</p>
+          <form id="message-form">
+            <label for="full-name">Your name</label>
+            <input id="full-name" required minlength="2" maxlength="100" autocomplete="name" placeholder="Enter your name">
+            <label for="reply-contact">Phone or email</label>
+            <input id="reply-contact" required maxlength="254" autocomplete="email" placeholder="How can SCBS reply to you?">
+            <label for="message">Your message</label>
+            <textarea id="message" required minlength="10" maxlength="2000" placeholder="Write your message to SCBS"></textarea>
+            <button class="primary" id="send-scb-message" type="submit">Send Message</button>
+            <p id="message-form-status" class="muted" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+<!-- SCBS Password Recovery -->
+<section id="scbs-password-recovery" hidden>
+  <div class="card">
+    <h2>Recover Your SCBS Account</h2>
+    <p>Enter your registered email address to request a password reset code.</p>
+
+    <form id="scbs-recovery-request-form">
+      <label for="scbs-recovery-email">Registered Email Address</label>
+      <input
+        id="scbs-recovery-email"
+        type="email"
+        required
+        maxlength="254"
+        autocomplete="email"
+        placeholder="Enter your email address"
+      >
+
+      <button class="primary" type="submit">Request Verification Code</button>
     </form>
 
-    <h3>💬 Customer Messages</h3>
-    <div id="messages"></div>
+    <p id="scbs-recovery-message" role="status" aria-live="polite"></p>
 
-    <h3>📋 Current SCBS Content</h3>
-    <div id="adminContent"></div>
-
+    <button type="button" id="scbs-recovery-back">Back to Login</button>
   </div>
 </section>
-</main><script>
-const sections=['home','products','services','ads','contact','admin'];function show(id){sections.forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));if(id==='admin')checkAuth()}
-async function api(url,opt={}){const r=await fetch(url,{headers:{'Content-Type':'application/json',...(opt.headers||{})},...opt});let d=null;try{d=await r.json()}catch{}if(!r.ok)throw new Error(d?.error||'Request failed');return d}
-function card(title,body,extra=''){return `<div class="card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body||'')}</p>${extra}</div>`}function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-async function load(){const d=await api('/api/public/data');document.getElementById('productsList').innerHTML=d.products.map(x=>card(x.name,`${x.category?`<b>Category:</b> ${escapeHtml(x.category)}<br>`:''}${x.description?`${escapeHtml(x.description)}<br>`:''}${x.price?`<b>Price:</b> ${escapeHtml(x.price)}<br>`:''}<b>Stock:</b> ${x.stock}`,x.image_url?`<img src="${escapeHtml(x.image_url)}" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:10px">`:'' )).join('')||'<p>No products posted yet.</p>';document.getElementById('servicesList').innerHTML=d.services.map(x=>card(x.name,x.description)).join('')||'<p>No services posted yet.</p>';document.getElementById('toolRentalsList').innerHTML=d.toolRentals.map(x=>card(x.name,`${x.category?`<b>Category:</b> ${escapeHtml(x.category)}<br>`:''}${x.description?`${escapeHtml(x.description)}<br>`:''}<b>Hourly Rental:</b> ${escapeHtml(x.hourly_rate)}`)).join('')||'<p>No tool rentals available yet.</p>';document.getElementById('adsList').innerHTML=d.advertisements.map(x=>card(x.title,x.body)).join('')||'<p>No advertisements posted yet.</p>';document.getElementById('homeAds').innerHTML=d.advertisements.slice(0,3).map(x=>card(x.title,x.body)).join('')}msg.onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);try{await api('/api/public/messages',{method:'POST',body:JSON.stringify(Object.fromEntries(f))});msgStatus.textContent='Message sent successfully.';e.target.reset()}catch(err){msgStatus.textContent=err.message}}
-loginForm.onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);try{await api('/api/auth/login',{method:'POST',body:JSON.stringify(Object.fromEntries(f))});e.target.reset();await checkAuth()}catch(err){loginStatus.textContent=err.message}}
-async function checkAuth(){try{const d=await api('/api/auth/me');login.classList.toggle('hidden',d.authenticated);dash.classList.toggle('hidden',!d.authenticated);if(d.authenticated){adminEmail.textContent=d.email;await dashboard()}}catch{login.classList.remove('hidden');dash.classList.add('hidden')}}
-async function dashboard(){const d=await api('/api/admin/dashboard');messages.innerHTML=d.messages.map(x=>card(x.customer_name,`${x.customer_contact}: ${x.message}`)).join('')||'<p>No messages.</p>';adminContent.innerHTML='<b>Products</b><br>'+d.products.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('products',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Services</b><br>'+d.services.map(x=>`${escapeHtml(x.name)} <button class="danger" onclick="del('services',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Tool Rentals</b><br>'+d.toolRentals.map(x=>`${escapeHtml(x.name)} — ${escapeHtml(x.hourly_rate)} / hour <button class="danger" onclick="del('tool-rentals',${x.id})">Delete</button>`).join('<br>')+'<br><br><b>Advertisements</b><br>'+d.advertisements.map(x=>`${escapeHtml(x.title)} <button class="danger" onclick="del('advertisements',${x.id})">Delete</button>`).join('<br>')}async function del(type,id){if(!confirm('Delete this item?'))return;await api(`/api/admin/${type}/${id}`,{method:'DELETE'});await dashboard();await load()}
-productForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/products',e.target)};serviceForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/services',e.target)};toolRentalForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/tool-rentals',e.target)};adForm.onsubmit=async e=>{e.preventDefault();await create('/api/admin/advertisements',e.target)};async function create(url,form){const o=Object.fromEntries(new FormData(form));try{await api(url,{method:'POST',body:JSON.stringify(o)});form.reset();await dashboard();await load()}catch(e){alert(e.message)}}async function logout(){await api('/api/auth/logout',{method:'POST'});checkAuth()}load();show('home');
-</script></body></html>
 
+</main>
+
+    <footer>(c) <span id="year"></span> Sergio Chabu Business System (SCBS) | Products | Services | Books | Technology</footer>
+  </div>
+
+  <div class="backdrop" id="admin-backdrop" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+    <div class="modal">
+      <div class="modal-head"><h2 id="admin-title">SCBS Administrator Login</h2><button id="close-admin" aria-label="Close" type="button">x</button></div>
+      <div id="admin-login-panel">
+        <p class="muted">Sign in to manage Sergio Chabu Business System.</p>
+        <form id="admin-login-form">
+          <label for="admin-email">Administrator Email</label><input id="admin-email" type="email" required maxlength="254" autocomplete="username">
+          <label for="admin-password">Password</label><input id="admin-password" type="password" required maxlength="1024" autocomplete="current-password">
+          <button class="primary" type="submit">Sign In Securely</button>
+         <p style="text-align:center; margin-top:15px;">
+  <a href="#" id="scbs-forgot-password">Forgot Password?</a>
+</p>
+        </form>
+        <p id="admin-login-error" role="alert" class="muted"></p>
+      </div>
+      <div id="admin-dashboard-panel" hidden>
+        <section id="scbs-post-management" class="admin-management">
+          <h2>SCBS Posts Management</h2>
+          <p class="muted">Create public posts and announcements. Only signed-in administrators can manage posts.</p>
+          <button type="button" id="scbs-create-post-toggle" class="scbs-create-post-button">CREATE SCBS POST</button>
+          <form id="scbs-create-post-form" hidden>
+            <label for="scbs-post-title">Post title</label>
+            <input id="scbs-post-title" name="title" maxlength="150" required>
+            <label for="scbs-post-body">Post text</label>
+            <textarea id="scbs-post-body" name="body" rows="5" maxlength="5000" required></textarea>
+            <label for="scbs-post-image">Image URL (optional; HTTPS or an existing local /uploads/ path)</label>
+            <input id="scbs-post-image" name="image_url" maxlength="1000" type="text" placeholder="https://... or /uploads/...">
+            <label><input type="checkbox" id="scbs-post-announcement" style="width:auto"> Show as the announcement bar</label>
+            <label for="scbs-post-status">Publication</label>
+            <select id="scbs-post-status" name="status">
+              <option value="draft">Save as draft</option>
+              <option value="published">Publish now</option>
+              <option value="paused">Paused</option>
+            </select>
+            <button type="submit" class="primary">Save SCBS Post</button>
+            <p id="scbs-post-admin-status" class="muted" role="status" aria-live="polite"></p>
+          </form>
+          <h3>Published and draft posts</h3>
+          <button type="button" id="scbs-refresh-admin-posts">Refresh posts</button>
+          <div id="scbs-admin-post-list" class="scbs-admin-post-list"></div>
+        </section>
+
+<!-- SCBS PRIVATE ISSUE REPORTS -->
+<section id="scbs-issue-report-management" class="admin-management">
+  <h2>Private Issue Reports</h2>
+  <p class="muted">Only authorized administrators can view submitted reports. Treat contact details and report contents as confidential.</p>
+  <button type="button" class="primary" id="scbs-refresh-issue-reports">Refresh issue reports</button>
+  <p id="scbs-issue-admin-status" class="muted" role="status" aria-live="polite">Sign in as an administrator to review reports.</p>
+  <div id="scbs-admin-issue-list"></div>
+</section>
+
+<!-- SCBS CUSTOMER MESSAGES INBOX -->
+<!-- SCBS BOOKS MANAGEMENT -->
+<section id="book-management" class="admin-management">
+  <h3>SCBS Books Management</h3>
+  <p class="muted">
+    Add books, manage prices and stock, and control publication.
+  </p>
+
+  <button type="button" class="primary" id="load-books">
+    Refresh Books
+  </button>
+
+  <p id="book-status" class="muted" role="status">
+    Sign in and refresh books.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Book Code</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Format</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Publication</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="book-list">
+        <tr>
+          <td colspan="8">Sign in and load books.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+
+  <h3>Add or Edit a Book</h3>
+
+  <form id="book-form">
+    <label for="book-code">Book Code</label>
+    <input
+      id="book-code"
+      required
+      minlength="2"
+      maxlength="40"
+      pattern="[A-Za-z0-9_-]{2,40}"
+      placeholder="SCBS-BOOK-002"
+    >
+
+    <label for="book-title">Book Title</label>
+    <input
+      id="book-title"
+      required
+      minlength="2"
+      maxlength="200"
+    >
+
+    <label for="book-author">Author</label>
+    <input
+      id="book-author"
+      required
+      minlength="2"
+      maxlength="150"
+      value="Sergio Chabu"
+    >
+
+    <label for="book-category">Category</label>
+    <input
+      id="book-category"
+      maxlength="100"
+      placeholder="Education, Technology, Stories..."
+    >
+
+    <label for="book-format">Book Format</label>
+    <select id="book-format" required>
+      <option value="print">Print</option>
+      <option value="digital">Digital</option>
+      <option value="both">Print and Digital</option>
+    </select>
+
+    <label for="book-description">Description</label>
+    <textarea id="book-description" maxlength="5000"></textarea>
+
+    <label for="book-price">Price (ZMW)</label>
+    <input
+      id="book-price"
+      type="number"
+      min="0"
+      step="0.01"
+      value="0"
+      required
+    >
+
+    <label for="book-stock">Stock Quantity</label>
+    <input
+      id="book-stock"
+      type="number"
+      min="0"
+      step="1"
+      value="0"
+      required
+    >
+
+    <label for="book-cover">Cover Image URL (optional)</label>
+    <input
+      id="book-cover"
+      type="url"
+      maxlength="1000"
+      placeholder="https://example.com/book-cover.jpg"
+    ><div class="book-cover-upload">
+  <label for="book-cover-file">Or choose a cover image from your computer</label>
+
+  <input
+    id="book-cover-file"
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+  >
+
+  <p class="muted">Supported formats: JPG, PNG and WebP. Maximum size: 2 MB.</p>
+
+  <img
+    id="book-cover-preview"
+    alt="Selected book cover preview"
+    hidden
+    style="max-width: 180px; max-height: 240px; object-fit: contain;"
+  >
+
+  <button id="upload-book-cover" type="button" class="ghost">
+    Upload Cover Image
+  </button>
+
+  <p id="book-cover-upload-status" class="muted" role="status"></p>
+</div>
+
+    <label for="book-publication-status">Publication Status</label>
+    <select id="book-publication-status" required>
+      <option value="draft">Draft</option>
+      <option value="published">Published</option>
+      <option value="archived">Archived</option>
+    </select>
+
+    <div class="actions">
+      <button type="submit" class="primary" id="save-book">
+        Save Book
+      </button>
+      <button
+        type="button"
+        class="ghost"
+        id="cancel-book-edit"
+        hidden
+      >
+        Cancel Editing
+      </button>
+    </div>
+  </form>
+</section><section id="customer-messages-management" class="admin-management">
+  <h3>Customer Messages Inbox</h3>
+  <p class="muted">
+    Review customer enquiries, update their status, and record administrator notes.
+  </p>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <label for="message-status-filter">Filter messages</label>
+    <select id="message-status-filter">
+      <option value="">All messages</option>
+      <option value="new">New</option>
+      <option value="read">Read</option>
+      <option value="in_progress">In progress</option>
+      <option value="resolved">Resolved</option>
+      <option value="spam">Spam</option>
+    </select>
+
+    <button type="button" class="primary" id="refresh-customer-messages">
+      Refresh Inbox
+    </button>
+  </div>
+
+  <p id="admin-customer-messages-status" class="muted" role="status">
+    Sign in as administrator to load customer messages.
+  </p>
+
+  <div id="customer-messages-list" class="grid"></div>
+</section>
+        <p class="muted">Signed in as <strong id="admin-display-name"></strong></p>
+        <div class="admin-grid">
+          <div class="admin-tile"><strong>Products</strong><small>Manage groceries and other products.</small></div>
+          <div class="admin-tile"><strong>Services</strong><small>Manage SCBS technology and business services.</small></div>
+          <div class="admin-tile"><strong>Advertisements</strong><small>Manage promotions and announcements.</small></div>
+          <div class="admin-tile"><strong>Customer Messages</strong><small>Review customer enquiries.</small></div>
+          <div class="admin-tile"><strong>Business Management</strong><small>SCBS management area.</small></div>
+          <div class="admin-tile"><strong>Security</strong><small>Administrator access is authenticated by the server.</small></div>
+        </div>
+        <section id="product-management" class="admin-management">
+          <h3> Product Management</h3>
+          <p class="muted">Manage groceries, phones, accessories and other products.</p>
+          <button type="button" class="primary" id="load-products">Refresh Products</button>
+          <p id="product-status" class="muted" role="status"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+  <tr>
+    <th>Picture</th>
+    <th>SKU</th>
+    <th>Product</th>
+    <th>Type</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+              <tbody id="product-list">
+  <tr><td colspan="7">Sign in and load products.</td></tr>
+</tbody>
+            </table>
+          </div>
+          <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+          <h3>Add or Edit a Product</h3>
+          <form id="product-form">
+            <label for="product-sku">SKU / Product Code</label><input id="product-sku" required maxlength="40" pattern="[A-Za-z0-9_-]{2,40}">
+            <label for="product-name">Product Name</label><input id="product-name" required minlength="2" maxlength="150">
+            <label for="product-type">Product Type</label>
+            <select id="product-type" required>
+              <option value="grocery">Grocery</option><option value="phone">Phone</option><option value="accessory">Accessory</option><option value="electronics">Electronics</option><option value="general">General</option>
+            </select>
+            <label for="product-description">Description</label><label for="product-image-url">Product Image URL (optional)</label>
+<input
+  id="product-image-url"
+  type="url"
+  maxlength="500"
+  placeholder="https://example.com/phone.jpg"
+>
+<p class="muted">
+  Add a direct image URL for the product. Leave empty if no picture is available.
+</p><textarea id="product-description" maxlength="2000"></textarea>
+            <label for="product-price">Price (ZMW)</label><input id="product-price" type="number" min="0" step="0.01" required>
+            <label for="product-stock">Stock Quantity</label><input id="product-stock" type="number" min="0" step="1" value="0" required>
+            <div class="actions"><button type="submit" class="primary">Save Product</button><button type="button" id="cancel-product-edit" class="ghost" hidden>Cancel Editing</button></div>
+          </form>
+        </section>
+                <!-- SCBS SERVICES MANAGEMENT -->
+        <section id="service-management" class="admin-management">
+          <h3>Multi-Tech Services Management</h3>
+          <p class="muted">Add, edit and control the availability of SCBS services.</p>
+
+          <button type="button" class="primary" id="load-services">
+            Refresh Services
+          </button>
+
+          <p id="service-status" class="muted" role="status"></p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Service</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="service-list">
+                <tr>
+                  <td colspan="6">Sign in and load services.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+
+          <h3>Add or Edit a Service</h3>
+
+          <form id="service-form">
+            <label for="service-code">Service Code</label>
+            <input id="service-code"
+                   required minlength="2" maxlength="40"
+                   pattern="[A-Za-z0-9_-]{2,40}">
+
+            <label for="service-name">Service Name</label>
+            <input id="service-name"
+                   required minlength="2" maxlength="150">
+
+            <label for="service-category">Category</label>
+            <select id="service-category" required>
+              <option value="multi-tech">Multi-Tech</option>
+              <option value="computer">Computer Services</option>
+              <option value="mobile">Mobile Phone Services</option>
+              <option value="web">Website Development</option>
+              <option value="cybersecurity">Cybersecurity</option>
+              <option value="business">Business Services</option>
+              <option value="other">Other</option>
+            </select>
+
+            <label for="service-image-file">Service Image (JPEG, PNG, or WebP; maximum 2 MB)</label>
+            <input id="service-image-file" type="file" accept="image/jpeg,image/png,image/webp">
+            <input id="service-image-url" type="hidden">
+            <img id="service-image-preview" alt="Service image preview" hidden
+                 style="max-width:220px;max-height:150px;object-fit:contain;border-radius:12px;margin:8px 0">
+
+            <label for="service-description">Description</label>
+            <textarea id="service-description" maxlength="3000"></textarea>
+
+            <label for="service-price">Price (ZMW)</label>
+            <input id="service-price"
+                   type="number" min="0" step="0.01">
+
+            <label for="service-pricing-type">Pricing Type</label>
+            <select id="service-pricing-type" required>
+              <option value="fixed">Fixed Price</option>
+              <option value="from">Starting From</option>
+              <option value="quote">Request a Quote</option>
+            </select>
+
+            <label for="service-duration">Estimated Duration</label>
+            <input id="service-duration" maxlength="100"
+                   placeholder="e.g. 1 hours">
+
+            <div class="actions">
+              <button type="submit" class="primary" id="save-service">
+                Save Service
+              </button>
+              <button type="button" class="ghost"
+                      id="cancel-service-edit" hidden>
+                Cancel Editing
+              </button>
+            </div>
+          </form>
+          <!-- SCBS RENTAL MANAGEMENT -->
+<section id="rental-management" class="admin-management">
+  <h3>Rental Tools Management</h3>
+  <p class="muted">
+    Add rental tools, set hourly and daily prices, manage inventory,
+    and review customer booking requests.
+  </p>
+
+  <button type="button" class="primary" id="scbs-load-rentals">
+    Refresh Rental Inventory
+  </button>
+
+  <p id="scbs-rental-status" class="muted" role="status" aria-live="polite">
+    Sign in as administrator to manage rental tools.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item Code</th>
+          <th>Tool</th>
+          <th>Hourly Rate</th>
+          <th>Daily Rate</th>
+          <th>Quantity</th>
+          <th>Condition</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="scbs-rental-inventory">
+        <tr>
+          <td colspan="7">Load rental inventory to begin.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+
+  <h3 id="scbs-rental-form-title">Add a Rental Tool</h3>
+
+  <form id="scbs-rental-form">
+    <label for="scbs-rental-code">Item Code</label>
+    <input
+      id="scbs-rental-code"
+      required
+      minlength="2"
+      maxlength="40"
+      pattern="[A-Za-z0-9_-]{2,40}"
+      placeholder="e.g. TOOL-001"
+    >
+
+    <label for="scbs-rental-name">Tool Name</label>
+    <input
+      id="scbs-rental-name"
+      required
+      minlength="2"
+      maxlength="150"
+      placeholder="e.g. Electric Drill"
+    >
+
+    <label for="scbs-rental-description">Description</label>
+    <textarea
+      id="scbs-rental-description"
+      maxlength="2000"
+      placeholder="Describe the tool and what it is used for."
+    ></textarea>
+
+    <label for="scbs-rental-hourly-rate">Hourly Rate (ZMW)</label>
+    <input
+      id="scbs-rental-hourly-rate"
+      type="number"
+      min="0"
+      step="0.01"
+      placeholder="e.g. 15.00"
+    >
+
+    <label for="scbs-rental-daily-rate">Daily Rate (ZMW)</label>
+    <input
+      id="scbs-rental-daily-rate"
+      type="number"
+      min="0"
+      step="0.01"
+      required
+      placeholder="e.g. 100.00"
+    >
+
+    <label for="scbs-rental-quantity">Available Quantity</label>
+    <input
+      id="scbs-rental-quantity"
+      type="number"
+      min="0"
+      step="1"
+      value="1"
+      required
+    >
+
+    <label for="scbs-rental-condition">Tool Condition</label>
+    <select id="scbs-rental-condition" required>
+      <option value="excellent">Excellent</option>
+      <option value="good" selected>Good</option>
+      <option value="fair">Fair</option>
+      <option value="repair">Needs Repair</option>
+    </select>
+
+    <label for="scbs-rental-image">Tool Picture (optional)</label>
+    <input
+      id="scbs-rental-image"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+    >
+    <p class="muted">Choose a JPEG, PNG, or WebP image. Maximum size: 2 MB.</p>
+
+    <button type="submit" class="primary" id="scbs-rental-save">Save Rental Tool</button>
+    <button type="button" class="ghost" id="scbs-rental-cancel-edit" hidden>Cancel Edit</button>
+  </form>
+
+  <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+
+  <h3>Customer Rental Bookings</h3>
+
+  <button type="button" class="primary" id="scbs-load-rental-bookings">
+    Refresh Booking Requests
+  </button>
+
+  <p id="scbs-rental-booking-status" class="muted" role="status"
+     aria-live="polite">
+    Refresh bookings to view customer requests.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Booking Number</th>
+          <th>Customer</th>
+          <th>Tool</th>
+          <th>Period</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="scbs-rental-bookings">
+        <tr>
+          <td colspan="10">Load booking requests to begin.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<!-- END SCBS RENTAL MANAGEMENT -->
+<!-- SCBS OWNER CUSTOMER ACCOUNTS AND ORDERS -->
+<section id="scbs-account-order-management" class="admin-management" hidden>
+  <h3>Customer Accounts &amp; Orders</h3>
+  <p class="muted">Owner-only controls. Account actions are recorded; orders are cancelled without deleting their history.</p>
+  <div class="panel-grid">
+    <div class="panel">
+      <h4>Customer Accounts</h4>
+      <button type="button" class="ghost" id="scbs-admin-refresh-customers">Refresh Customers</button>
+      <p id="scbs-admin-customer-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="scbs-admin-customer-list" class="table-wrap"><p class="muted">Refresh customers to load accounts.</p></div>
+    </div>
+    <div class="panel">
+      <h4>Orders</h4>
+      <button type="button" class="ghost" id="scbs-admin-refresh-orders">Refresh Orders</button>
+      <p id="scbs-admin-order-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="scbs-admin-order-list" class="table-wrap"><p class="muted">Refresh orders to load orders.</p></div>
+    </div>
+  </div>
+</section>
+<!-- END SCBS OWNER CUSTOMER ACCOUNTS AND ORDERS -->
+
+               <!-- SCBS OWNER PAYMENT MANAGEMENT -->
+        <section id="payment-management" class="admin-management">
+          <h3>Payments Management</h3>
+          <p class="muted">
+            Review customer payment requests and monitor payment statuses.
+            Payments are not confirmed until verified with the payment provider.
+          </p>
+
+          <button type="button" class="ghost" id="load-admin-payments">
+  Refresh Payments
+</button>
+
+<div id="admin-payment-summary" class="scbs-payment-summary">
+  <article class="scbs-payment-card">
+    <h4>Total Requests</h4>
+    <p id="admin-payment-total">-</p>
+  </article>
+
+  <article class="scbs-payment-card">
+    <h4>Pending</h4>
+    <p id="admin-payment-pending">-</p>
+  </article>
+
+  <article class="scbs-payment-card">
+    <h4>Successful</h4>
+    <p id="admin-payment-successful">-</p>
+  </article>
+
+  <article class="scbs-payment-card">
+    <h4>Failed</h4>
+    <p id="admin-payment-failed">-</p>
+  </article>
+</div>
+
+<p id="admin-payment-status" class="muted" role="status"></p>
+
+<div id="admin-payment-list">
+  <p class="muted">Select Refresh Payments to load payment records.</p>
+</div>
+        </section>
+        <!-- END SCBS OWNER PAYMENT MANAGEMENT -->
+               <!-- SCBS-OWNER-TEAM-MANAGEMENT-V1 -->
+<section id="scbs-team-management" class="admin-management" hidden>
+  <h3>Team Management</h3>
+  <p class="muted">
+    Owner-only controls for SCBS managers and staff.
+    Passwords are never displayed in the team list.
+  </p>
+
+  <button type="button" class="ghost" id="scbs-team-refresh">
+    Refresh Team
+  </button>
+
+  <p id="scbs-team-status" class="muted" role="status" aria-live="polite"></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Last Login</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="scbs-team-rows">
+        <tr><td colspan="6">Select Refresh Team to load administrators.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h4>Create a Team Account</h4>
+  <form id="scbs-team-create-form">
+    <label for="scbs-team-name">Display name</label>
+    <input id="scbs-team-name" name="display_name"
+           required maxlength="100" autocomplete="name">
+
+    <label for="scbs-team-email">Email address</label>
+    <input id="scbs-team-email" name="email" type="email"
+           required maxlength="254" autocomplete="email">
+
+    <label for="scbs-team-role">Role</label>
+    <select id="scbs-team-role" name="role" required>
+      <option value="staff">Staff - read-only access</option>
+      <option value="manager">Manager - business management access</option>
+    </select>
+
+    <label for="scbs-team-password">Temporary account password</label>
+    <input id="scbs-team-password" name="password" type="password"
+           required minlength="12" maxlength="1024"
+           autocomplete="new-password">
+    <p class="muted">Use at least 12 characters. Do not reuse your owner password.</p>
+
+    <button type="submit" class="primary" id="scbs-team-create-button">
+      Create Account
+    </button>
+  </form>
+</section>
+<!-- END SCBS-OWNER-TEAM-MANAGEMENT-V1 -->
+<!-- SCBS ADVERTISEMENT MANAGEMENT -->
+        <section id="advertisement-management" class="admin-management">
+          <h3>Advertisements & Promotions</h3>
+          <p class="muted">Create, edit, publish, and pause SCBS promotions.</p>
+
+          <button type="button" class="ghost" id="load-advertisements">
+            Refresh Advertisements
+          </button>
+
+          <p id="advertisement-status" class="muted" role="status"></p>
+
+          <div id="advertisement-list"></div>
+
+          <h4 id="advertisement-form-heading">Create Advertisement</h4>
+
+          <form id="advertisement-form">
+            <label for="advertisement-code">Advertisement Code</label>
+            <input id="advertisement-code" name="ad_code"
+                   required minlength="2" maxlength="40"
+                   pattern="[A-Za-z0-9_-]+"
+                   placeholder="e.g. SCBS-PROMO-01">
+
+            <label for="advertisement-title">Title</label>
+            <input id="advertisement-title" name="title"
+                   required minlength="2" maxlength="150"
+                   placeholder="Promotion title">
+
+            <label for="advertisement-description">Description</label>
+            <textarea id="advertisement-description" name="description"
+                      maxlength="5000"
+                      placeholder="Describe the promotion"></textarea>
+
+            <label for="advertisement-image-file">Promotion Image (optional)</label>
+            <input id="advertisement-image-file" name="image" type="file"
+                   accept="image/jpeg,image/png,image/webp">
+            <input id="advertisement-image" name="image_url" type="hidden">
+            <p class="muted">Choose a JPEG, PNG, or WebP image (maximum 2 MB). No image URL is needed.</p>
+            <img id="advertisement-image-preview" alt="Advertisement image preview" hidden
+                 style="display:none;max-width:100%;max-height:220px;object-fit:contain;border-radius:14px;margin:8px 0">
+
+            <label for="advertisement-start">Start Date (optional)</label>
+            <input id="advertisement-start" name="starts_at" type="datetime-local">
+
+            <label for="advertisement-end">End Date (optional)</label>
+            <input id="advertisement-end" name="ends_at" type="datetime-local">
+
+            <label for="advertisement-state">Status</label>
+            <select id="advertisement-state" name="status" required>
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="draft">Draft / Paused</option>
+            </select>
+
+            <div class="actions">
+              <button type="submit" class="primary" id="save-advertisement">
+                Save Advertisement
+              </button>
+              <button type="button" class="ghost"
+                      id="cancel-advertisement-edit" hidden>
+                Cancel Editing
+              </button>
+            </div>
+          </form>
+        </section></section>
+
+        <section id="scbs-video-management" class="admin-management">
+          <h3>SCBS Videos Management</h3>
+          <p class="muted">Add YouTube tutorial links, publish them to the public SCBS video library, and edit or delete entries. Video files are not uploaded to this server.</p>
+          <button type="button" class="ghost" id="scbs-refresh-admin-videos">Refresh Videos</button>
+          <p id="scbs-admin-videos-status" class="muted" role="status" aria-live="polite"></p>
+          <div id="scbs-admin-video-list"></div>
+          <h4 id="scbs-video-form-heading">Add SCBS Video</h4>
+          <form id="scbs-video-form">
+            <label for="scbs-video-title">Video title</label>
+            <input id="scbs-video-title" maxlength="150" minlength="2" required placeholder="How to turn TalkBack off">
+            <label for="scbs-video-description">Description / steps covered</label>
+            <textarea id="scbs-video-description" maxlength="5000" rows="3" placeholder="Briefly explain what this tutorial teaches"></textarea>
+            <label for="scbs-video-admin-category">Category</label>
+            <select id="scbs-video-admin-category" required>
+              <option value="Phone Tutorials">Phone Tutorials</option>
+              <option value="Computer Tutorials">Computer Tutorials</option>
+              <option value="Windows">Windows</option>
+              <option value="GSM &amp; Software">GSM &amp; Software</option>
+              <option value="Troubleshooting">Troubleshooting</option>
+              <option value="General">General</option>
+            </select>
+            <label for="scbs-video-youtube-url">YouTube video link</label>
+            <input id="scbs-video-youtube-url" type="url" maxlength="1000" required placeholder="https://www.youtube.com/watch?v=...">
+            <p class="muted">Use a YouTube video link. For now, keep each tutorial to 10 minutes or less. Upload the video to YouTube first.</p>
+            <label for="scbs-video-admin-status">Publication</label>
+            <select id="scbs-video-admin-status" required>
+              <option value="draft">Save as draft</option>
+              <option value="published">Publish now</option>
+              <option value="paused">Pause / hide from public</option>
+            </select>
+            <div class="actions">
+              <button type="submit" class="primary" id="scbs-video-save">Save Video</button>
+              <button type="button" class="ghost" id="scbs-video-cancel-edit" hidden>Cancel Editing</button>
+            </div>
+          </form>
+        </section>
+<!-- SCBS BOOK LOGISTICS ADMIN MANAGEMENT -->
+        <section id="scbs-logistics-admin" class="admin-management scbs-logistics-admin">
+          <h2>BOOK LOGISTICS</h2><p class="muted">Manage carriers, vehicles, drivers, cargo categories, per-kg pricing and customer booking requests.</p>
+          <button type="button" class="primary" id="scbs-logistics-refresh">Refresh logistics & bookings</button>
+          <h3>Add logistics carrier</h3>
+          <form id="scbs-logistics-admin-form" class="scbs-logistics-admin-form">
+            <label for="scbs-logistics-carrier">Carrier / company name</label><input id="scbs-logistics-carrier" name="carrier_name" maxlength="120" required>
+            <label for="scbs-logistics-carrier-phone">Carrier contact number</label><input id="scbs-logistics-carrier-phone" name="carrier_phone" maxlength="40" type="tel" required>
+            <label for="scbs-logistics-plate">Vehicle number plate</label><input id="scbs-logistics-plate" name="vehicle_plate" maxlength="30" required>
+            <label for="scbs-logistics-vehicle-image">Vehicle image URL (optional, http/https)</label><input id="scbs-logistics-vehicle-image" name="vehicle_image_url" type="url" maxlength="1000" placeholder="https://...">
+            <label for="scbs-logistics-driver-image">Driver image URL (optional, http/https)</label><input id="scbs-logistics-driver-image" name="driver_image_url" type="url" maxlength="1000" placeholder="https://...">
+            <label for="scbs-logistics-cargo-type">Cargo type</label><select id="scbs-logistics-cargo-type" name="cargo_type" required><option value="">Choose cargo type</option><option>General goods</option><option>Electronics</option><option>Special cargo</option><option>Fragile goods</option><option>Food & groceries</option><option>Building materials</option><option>Furniture</option><option>Farm produce</option><option>Documents & parcels</option><option>Heavy / oversized cargo</option><option>Other</option></select>
+            <label for="scbs-logistics-rate">Price per kg (ZMW)</label><input id="scbs-logistics-rate" name="price_per_kg_zmw" type="number" min="0" max="100000000" step="0.01" required>
+            <label for="scbs-logistics-description">Service notes (optional)</label><textarea id="scbs-logistics-description" name="description" maxlength="1000" rows="3" placeholder="Routes served, capacity, handling requirements..."></textarea>
+            <button class="primary" type="submit">Save logistics option</button><p id="scbs-logistics-admin-status" role="status" aria-live="polite"></p>
+          </form>
+          <h3>Available carriers</h3><div id="scbs-logistics-admin-list" class="scbs-logistics-admin-list"></div>
+          <h3>Customer booking requests</h3><div id="scbs-logistics-bookings-list" class="scbs-logistics-bookings-list"></div>
+        </section>
+
+        <button class="primary" id="admin-logout" type="button" style="margin-top:20px">Sign Out</button>
+        <p id="admin-dashboard-message" class="muted" role="status"></p>
+      </div>
+    </div>
+  </div>
+
+    <!-- SCBS CUSTOMER PORTAL -->
+  <section id="customer-portal" class="customer-portal">
+    <h2>SCBS Customer Portal</h2>
+
+    <button id="customer-login" type="button" class="primary">
+      Customer Sign In
+    </button>
+
+    <div id="login-backdrop" hidden>
+      <div class="customer-login-panel" role="dialog"
+           aria-modal="true" aria-labelledby="customer-login-heading">
+
+        <button id="close-login" type="button" class="ghost">
+          Close
+        </button>
+
+        <div class="customer-login-brand">
+          <img id="customer-login-avatar" alt="SCBS customer avatar"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23438ff5'/%3E%3Cstop offset='1' stop-color='%238ce6d0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='58' fill='%230c1e36'/%3E%3Ccircle cx='60' cy='43' r='22' fill='url(%23g)'/%3E%3Cpath d='M19 105c3-23 19-36 41-36s38 13 41 36' fill='url(%23g)'/%3E%3C/svg%3E">
+          <div class="customer-login-brand-copy">
+            <span class="customer-login-kicker">SERGIO CHABU BUSINESS SYSTEM</span>
+            <h3 id="customer-login-heading">Welcome back</h3>
+            <p>Sign in securely to manage your SCBS account.</p>
+          </div>
+        </div>
+
+        <form id="login-form">
+          <label for="login-email">Email address</label>
+          <input id="login-email" name="email" type="email"
+                 autocomplete="username" required maxlength="254">
+
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password"
+                 autocomplete="current-password" required maxlength="72">
+
+          <button id="customer-submit" type="submit" class="primary">
+            Sign In
+          </button>
+        </form>        <p class="customer-register-prompt">
+          Don't have an account?
+          <button type="button" id="show-register" class="secondary">
+            Create Customer Account
+          </button>
+        </p>        <form id="register-form" hidden>
+          <h3>Create Your SCBS Account</h3>
+
+          <label for="register-name">Full name</label>
+          <input id="register-name" name="full_name" type="text"
+                 autocomplete="name" required minlength="2" maxlength="100">
+
+          <label for="register-email">Email address</label>
+          <input id="register-email" name="email" type="email"
+                 autocomplete="email" required maxlength="254">
+
+          <label for="register-phone">Phone number</label>
+          <input id="register-phone" name="phone" type="tel"
+                 autocomplete="tel" required minlength="7" maxlength="25">
+
+          <label for="register-password">Create password</label>
+          <input id="register-password" name="password" type="password"
+                 autocomplete="new-password" required minlength="12" maxlength="72">
+
+          <label for="register-picture">Profile picture (optional)</label>
+          <input id="register-picture" name="picture" type="file"
+                 accept="image/jpeg,image/png,image/webp">
+
+          <button id="customer-register-submit" type="submit" class="primary">
+            Create Account
+          </button>
+
+          <button type="button" id="show-login" class="secondary">
+            Back to Sign In
+          </button>
+        </form>        <p id="customer-register-status" role="status" aria-live="polite"></p>
+
+        <p id="customer-login-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+
+<!-- SCBS CUSTOMER DASHBOARD -->
+<section id="customer-dashboard" hidden>
+  <hr>
+
+  <div class="customer-profile-header">
+    <img
+      id="customer-profile-picture"
+      class="customer-dashboard-avatar"
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23438ff5'/%3E%3Cstop offset='1' stop-color='%238ce6d0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='58' fill='%230c1e36'/%3E%3Ccircle cx='60' cy='43' r='22' fill='url(%23g)'/%3E%3Cpath d='M19 105c3-23 19-36 41-36s38 13 41 36' fill='url(%23g)'/%3E%3C/svg%3E"
+      alt="Customer profile picture"
+      width="112"
+      height="112"
+    >
+
+    <div>
+      <h3 id="customer-dashboard-name">My Account</h3>
+      <p id="customer-dashboard-email"></p>
+      <p id="customer-dashboard-code"></p>
+    </div>
+  </div>
+
+  <!-- SCBS CUSTOMER COMMUNITY POST COMPOSER -->
+  <section class="scbs-customer-post-compose" aria-labelledby="scbs-customer-post-heading">
+    <h3 id="scbs-customer-post-heading">Share with the SCBS Community</h3>
+    <p>Ask for help, share an update, or tell the community what is on your mind.</p>
+    <form id="scbs-customer-post-form" enctype="multipart/form-data">
+      <label class="visually-hidden" for="scbs-customer-post-body">What is on your mind?</label>
+      <textarea id="scbs-customer-post-body" name="body" maxlength="1000" required placeholder="What is on your mind? Write up to 1,000 characters..."></textarea>
+      <div class="scbs-customer-post-actions">
+        <div>
+          <label class="scbs-customer-photo-label" for="scbs-customer-post-photo">📷 Add photo</label>
+          <input id="scbs-customer-post-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <p id="scbs-customer-photo-name" class="muted" aria-live="polite"></p>
+        </div>
+        <label class="scbs-customer-contact-consent"><input id="scbs-customer-post-share-contact" name="share_contact" type="checkbox" value="yes"> <span>Allow my email and phone number to appear publicly on this post so people can contact me. Leave unchecked to keep them private.</span></label>
+        <button id="scbs-customer-post-submit" class="scbs-customer-post-submit" type="submit">Post</button>
+      </div>
+      <p id="scbs-customer-post-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+  <!-- END SCBS CUSTOMER COMMUNITY POST COMPOSER -->
+
+  <nav aria-label="Customer account navigation">
+    <button type="button" id="customer-tab-profile">My Profile</button>
+    <button type="button" id="customer-tab-orders">My Orders</button>
+    <button type="button" id="customer-tab-messages"> Messages <span id="customer-message-badge" hidden>0</span></button>
+    <button type="button" id="customer-tab-cart"> My Cart</button>
+    <button type="button" id="customer-tab-rentals">My Rentals</button>
+    <button type="button" id="customer-tab-payments">My Payments</button>
+    <button type="button" id="customer-tab-addresses">My Addresses</button>
+    <button type="button" id="customer-tab-settings"> Settings</button>
+    <button type="button" id="customer-tab-home">Homepage</button>
+  </nav>
+
+  <div id="customer-dashboard-status" role="status" aria-live="polite"></div>
+
+  <section id="customer-panel-cart" hidden>
+    <h3> My Cart</h3>
+    <p class="muted">Review your items here before placing an order.</p>
+    <div id="customer-cart-mount"></div>
+  </section>
+
+  <section id="customer-panel-messages" hidden>
+    <h3> Messages with SCBS</h3>
+    <p class="muted">Send a message and read replies from the SCBS team. Only you and authorized administrators can access this conversation history.</p>
+    <p id="customer-messages-status" role="status" aria-live="polite"></p>
+    <form id="customer-message-compose">
+      <label for="customer-message-subject">Subject</label>
+      <input id="customer-message-subject" name="subject" minlength="3" maxlength="150" required>
+      <label for="customer-message-body">Message</label>
+      <textarea id="customer-message-body" name="message" minlength="10" maxlength="5000" rows="4" required></textarea>
+      <button type="submit" id="customer-message-send">Send message</button>
+    </form>
+    <button type="button" id="customer-messages-refresh">Refresh messages</button>
+    <div id="customer-portal-messages-list" class="grid" aria-live="polite"></div>
+  </section>
+
+  <section id="customer-panel-profile">
+    <h3>My Profile</h3>
+
+    <p>
+      <strong>Full name:</strong>
+      <span id="customer-profile-name"></span>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <span id="customer-profile-email"></span>
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      <span id="customer-profile-phone"></span>
+    </p>
+</section>
+
+  <section id="customer-panel-orders" hidden>
+  <h3>My Orders</h3>
+
+  <button type="button" id="customer-load-orders">
+    Refresh Orders
+  </button>
+
+  <div id="customer-orders-list"></div>
+
+  <hr>
+
+  <h3>Pay for an Order</h3>
+
+  <p>
+    Select one of your orders and choose a mobile-money provider
+    to create a test payment request.
+  </p>
+
+  <p class="muted">
+    Test mode only: no money will be collected or transferred.
+  </p>
+
+  <form id="customer-payment-request-form">
+    <label for="customer-payment-order">
+      Select Order
+    </label>
+
+    <select id="customer-payment-order" required>
+      <option value="">Load your orders first</option>
+    </select>
+
+    <label for="customer-payment-provider">
+      Payment Provider
+    </label>
+
+   
+<div class="scbs-payment-providers">
+
+  <label class="scbs-payment-provider" for="customer-provider-mtn">
+    <img
+      src="/images/mtn-mobile-money.svg"
+      alt="MTN Mobile Money"
+      class="scbs-provider-logo"
+    >
+
+    <input
+      id="customer-provider-mtn"
+      type="radio"
+      name="customer-payment-provider-choice"
+      value="mtn_momo"
+      required
+    >
+
+    <span>MTN MoMo</span>
+  </label>
+
+  <label class="scbs-payment-provider" for="customer-provider-airtel">
+    <img
+      src="/images/airtel-money.svg"
+      alt="Airtel Money"
+      class="scbs-provider-logo"
+    >
+
+    <input
+      id="customer-provider-airtel"
+      type="radio"
+      name="customer-payment-provider-choice"
+      value="airtel_money"
+      required
+    >
+
+    <span>Airtel Money</span>
+  </label>
+
+</div>
+
+    <button type="submit" id="customer-payment-submit">
+      Create Test Payment Request
+    </button>
+  </form>
+
+  <p id="customer-payment-request-status"
+     class="muted"
+     role="status"
+     aria-live="polite">
+  </p>
+</section>
+
+  <section id="customer-panel-payments" hidden>
+    <h3>My Payments</h3>
+    <button type="button" id="customer-load-payments">Refresh Payments</button>
+    <div id="customer-payments-list"></div>
+  </section>
+<!-- SCBS CUSTOMER RENTALS -->
+<section id="customer-panel-rentals" hidden>
+  <h3>My Rentals</h3>
+
+  <p class="muted">
+    Browse equipment, choose a rental period, and submit a request
+    for owner approval.
+  </p>
+
+  <button type="button" class="primary" id="customer-load-rentals">
+    Browse Available Tools
+  </button>
+
+  <p id="customer-rentals-status"
+     class="muted"
+     role="status"
+     aria-live="polite"></p>
+
+  <div id="customer-rentals-list" class="grid"></div>
+
+  <hr>
+
+  <h3>My Rental Requests</h3>
+
+  <button type="button" class="ghost" id="customer-load-rental-bookings">
+    Refresh My Rental Requests
+  </button>
+
+  <p id="customer-rental-bookings-status"
+     class="muted"
+     role="status"
+     aria-live="polite"></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Booking Number</th>
+          <th>Tool</th>
+          <th>Period</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="customer-rental-bookings">
+        <tr>
+          <td colspan="8">Sign in and refresh your rental requests.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<!-- END SCBS CUSTOMER RENTALS -->
+  
+<section id="customer-panel-addresses" hidden>
+    <h3>My Addresses</h3>
+
+    <form id="customer-address-form">
+  <h4>Add Delivery Address</h4>
+
+  <label for="address-label">Address label</label>
+  <input id="address-label" name="address_label"
+         value="Home" required maxlength="40">
+
+  <label for="address-country">Country</label>
+  <input id="address-country" name="country"
+         value="Zambia" required maxlength="100">
+
+  <label for="address-province">Province</label>
+  <input id="address-province" name="province"
+         required maxlength="100">
+
+  <label for="address-city">City or town</label>
+  <input id="address-city" name="city"
+         required maxlength="100">
+
+  <label for="address-district">District</label>
+  <input id="address-district" name="district"
+         required maxlength="100">
+
+  <label for="address-area">Area or neighbourhood</label>
+  <input id="address-area" name="area"
+         required maxlength="150">
+
+  <label for="address-street">Street</label>
+  <input id="address-street" name="street"
+         required maxlength="150">
+
+  <label for="address-house-number">House number</label>
+  <input id="address-house-number" name="house_number"
+         required maxlength="50">
+
+  <label for="address-building">Building or flat (optional)</label>
+  <input id="address-building" name="building_flat" maxlength="300">
+
+  <label for="address-landmark">Nearby landmark (optional)</label>
+  <input id="address-landmark" name="landmark" maxlength="300">
+
+  <label for="address-instructions">Delivery instructions (optional)</label>
+  <textarea id="address-instructions"
+            name="delivery_instructions" maxlength="300"></textarea>
+
+  <button type="submit">Save Delivery Address</button>
+</form>
+
+<div id="customer-addresses-list"></div>
+  </section>
+  <section id="customer-panel-settings" hidden>
+  <h3> Customer Settings</h3>
+
+  <p>Manage your account and contact SCBS support.</p>
+
+  <h4>Edit Profile</h4>
+  <form id="customer-settings-profile-form">
+    <label for="customer-settings-name">Full name</label>
+    <input id="customer-settings-name" name="full_name"
+           maxlength="150" required>
+
+    <label for="customer-settings-phone">Phone number</label>
+    <input id="customer-settings-phone" name="phone"
+           type="tel" maxlength="30">
+
+    <label for="customer-settings-country">Country</label>
+    <select id="customer-settings-country" name="country" required>
+      <option value="Zambia">Zambia</option>
+      <option value="Zimbabwe">Zimbabwe</option>
+      <option value="Malawi">Malawi</option>
+      <option value="Tanzania">Tanzania</option>
+      <option value="South Africa">South Africa</option>
+      <option value="Botswana">Botswana</option>
+      <option value="Namibia">Namibia</option>
+      <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <button type="submit">Save Profile Settings</button>
+  </form>
+
+  <hr>
+
+  <h4>Help &amp; Support</h4>
+  <form id="customer-settings-support-form">
+    <label for="customer-settings-subject">Subject</label>
+    <select id="customer-settings-subject" name="subject" required>
+      <option value="Account">Account</option>
+      <option value="Orders">Orders</option>
+      <option value="Payments">Payments</option>
+      <option value="Products">Products</option>
+      <option value="Technical Support">Technical Support</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="customer-settings-message">How can we help?</label>
+    <textarea id="customer-settings-message" name="message"
+              minlength="10" maxlength="5000" required></textarea>
+
+    <button type="submit">Send to SCBS Support</button>
+  </form>
+
+  <p id="customer-settings-status" role="status"
+     aria-live="polite"></p>
+
+  <hr>
+
+  <h4>Security</h4>
+
+<form id="customer-settings-password-form">
+  <label for="customer-current-password">Current password</label>
+  <input
+    id="customer-current-password"
+    name="current_password"
+    type="password"
+    autocomplete="current-password"
+    required
+  >
+
+  <label for="customer-new-password">New password</label>
+  <input
+    id="customer-new-password"
+    name="new_password"
+    type="password"
+    autocomplete="new-password"
+    minlength="12"
+    maxlength="128"
+    required
+  >
+
+  <label for="customer-confirm-password">Confirm new password</label>
+  <input
+    id="customer-confirm-password"
+    name="confirm_password"
+    type="password"
+    autocomplete="new-password"
+    minlength="12"
+    maxlength="128"
+    required
+  >
+
+  <button type="submit">Change Password</button>
+</form>
+
+<p>Sign out securely when you finish using your account.</p>
+</section>
+  <button type="button" id="customer-dashboard-signout">
+    Sign Out
+  </button>
+</section>
+<!-- END SCBS CUSTOMER DASHBOARD -->
+  </section>
+  <!-- END SCBS CUSTOMER PORTAL -->
+
+<!-- SCBS AI Assistant: public read-only help -->
+<button id="scbs-ai-launcher" type="button" aria-controls="scbs-ai-panel" aria-expanded="false">Ask SCBS AI</button>
+<section id="scbs-ai-panel" role="dialog" aria-label="SCBS AI Assistant" hidden>
+  <div class="scbs-ai-head">
+    <div><strong>SCBS AI Assistant</strong><small>Ask about SCBS products and services</small></div>
+    <button id="scbs-ai-close" type="button" aria-label="Close assistant">x</button>
+  </div>
+  <div id="scbs-ai-messages" aria-live="polite">
+    <div class="scbs-ai-msg assistant">Hello! I can help you explore SCBS products, services, books, rentals and published promotions. I cannot access private accounts or payment details.</div>
+  </div>
+  <form id="scbs-ai-form">
+    <label for="scbs-ai-question">Your question</label>
+    <textarea id="scbs-ai-question" maxlength="1000" minlength="2" placeholder="What would you like to know about SCBS?" required></textarea>
+    <button id="scbs-ai-send" type="submit">Ask question</button>
+  </form>
+  <p id="scbs-ai-status" role="status" aria-live="polite">Answers use published SCBS information when available.</p>
+</section>
+<script src="/ai-assistant.js" defer></script>
+    <script src="/scbs.js" defer></script>
+    <script src="/logistics.js" defer></script>
+<footer style="
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  margin: 32px auto 18px;
+  padding: 12px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #e8f8ee;
+  color: #163c32;
+  border: 1px solid #c6ead4;
+  border-radius: 18px;
+  font: 600 12px/1.5 system-ui, sans-serif;
+  text-align: center;
+">
+  <strong>SCBS &copy; 2026</strong>
+  <span>|</span>
+  <button type="button" data-scbs-note="terms" style="background:none;border:0;padding:6px;color:#164b3b;font:inherit;cursor:pointer;">TERMS</button>
+  <span>|</span>
+  <button type="button" data-scbs-note="privacy" style="background:none;border:0;padding:6px;color:#164b3b;font:inherit;cursor:pointer;">PRIVACY</button>
+  <span>|</span>
+  <button type="button" data-scbs-note="legal" style="background:none;border:0;padding:6px;color:#164b3b;font:inherit;cursor:pointer;">LEGAL</button>
+</footer>
+
+<script>
+(function () {
+  var notices = {
+    terms: {
+      title: 'SCBS TERMS OF USE',
+      text: 'Use SCBS for legitimate business activities. Do not use it for fraud, unlawful activities, harassment or harmful conduct. Comply with applicable laws.'
+    },
+    privacy: {
+      title: 'SCBS PRIVACY NOTICE',
+      text: 'Protect customer information. Collect only what is needed for legitimate business operations and handle personal information responsibly.'
+    },
+    legal: {
+      title: 'SCBS LEGAL NOTICE',
+      text: 'Use SCBS lawfully and responsibly. Do not use it for fraud, illegal activities, abuse or harmful conduct. This general notice is not a substitute for legal advice.'
+    }
+  };
+
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    if (!target || typeof target.closest !== 'function') return;
+
+    var button = target.closest('button[data-scbs-note]');
+    if (!button) return;
+
+    var note = notices[button.getAttribute('data-scbs-note')];
+    if (!note) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation(); notify('  ' + note.title.toUpperCase(), note.text.toUpperCase(), 'error', 8000);
+  }, true);
+})();
+</script>
+</body>
+</html>
 
