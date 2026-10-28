@@ -19,6 +19,8 @@ import { sendCustomerLoginEmail } from './email-notifications.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+// Railway runs behind a trusted reverse proxy; needed for correct client IP and rate limiting.
+app.set('trust proxy', 1);
 // SCBS upload directory filesystem support
 const fs = await import('node:fs/promises');
 
