@@ -42,3 +42,7 @@ Status: design review only. No database has been changed by this document.
 
 ## Release gate
 Do not merge PR #1 until a migration implementation is tested against a copy of the actual legacy production database and the upgraded application passes startup, login, products, services, books, customer portal/messages, order placement/cancellation, and rental booking tests. Railway production remains unchanged until the release gate passes.
+
+## Additional startup blocker found during code review
+
+The upgrade server previously created `messages_customer_date_idx` unconditionally after adding reply columns. The legacy production `messages` table has neither `customer_id` nor the new customer-linked message shape, so SQLite would reject the index creation and stop the application at startup. The review branch now creates that index only when both referenced columns exist (commit `587bc5110c0c7b1055f8fe6af53c51477c1169d4`). This prevents that specific startup crash; it does **not** make all new message routes compatible with the legacy schema. The migration and end-to-end checks below remain required.
