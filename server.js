@@ -11,6 +11,7 @@ import { z } from 'zod';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+app.set('trust proxy', 1);
 const PORT = Number(process.env.PORT || 3000);
 const SESSION_SECRET = process.env.SESSION_SECRET || 'dev-only-change-this-secret-please-32chars';
 const dbDir = process.env.NODE_ENV === 'production' ? '/data' : __dirname;
