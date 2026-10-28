@@ -40,6 +40,14 @@ Status: design review only. No database has been changed by this document.
 9. Run migrations inside a transaction where SQLite supports it; maintain a schema version; make reruns idempotent.
 10. Validate row counts, foreign keys, integrity, inventory totals, order totals, and representative customer/order/rental records before any production release.
 
+## Read-only data preflight added
+
+The review branch includes `scripts/scbs-legacy-data-preflight.js`. It opens the supplied database in read-only mode and reports table/column shapes, row counts, product and rental price formats, order statuses and `items_json` shapes, SQLite integrity, and foreign-key violations. It does not alter schema or records. Run it only against a consistent staging copy of the legacy production database:
+
+`node scripts/scbs-legacy-data-preflight.js "C:\\path\\to\\staging\\scbs.db"`
+
+This report is intended to inform a reviewed migration mapping. It is not itself a migration and does not authorize any production changes.
+
 ## Release gate
 Do not merge PR #1 until a migration implementation is tested against a copy of the actual legacy production database and the upgraded application passes startup, login, products, services, books, customer portal/messages, order placement/cancellation, and rental booking tests. Railway production remains unchanged until the release gate passes.
 
