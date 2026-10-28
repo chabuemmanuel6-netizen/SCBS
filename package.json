@@ -6,7 +6,8 @@
   "description": "SCBS dark-navy commerce and multi-services platform starter",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test:preflight": "node --test tests/scbs-legacy-data-preflight.test.js"
   },
   "engines": {
     "node": ">=22"
